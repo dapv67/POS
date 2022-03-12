@@ -1,6 +1,6 @@
 @extends('productos.productos')
 
-@section('subcontent')
+@section('content')
     <div>
         <div class="tools-interno mb-2">
             <form class="form-inline d-flex">
