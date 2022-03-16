@@ -8,7 +8,7 @@
             <h1 class="title-modul">VENTAS - Ticket {{ $cantidad }}</h1>
             <div class="data-shop">
                 <p class="cajero me-4">Le tiende: {{ Auth::user()->name }}</p>
-                <p class="hora">{{ now() }}</p>
+                <p id="fechaHora" class="hora"></p>
             </div>
         </div>
 
@@ -263,7 +263,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="details-precio">
-                            <p class="precio-producto">$559.00</p>
+                            <p id="totalCobrar" class="precio-producto">$0</p>
                         </div>
                         <div class="cobro">
                             <div class="d-flex">
@@ -286,12 +286,12 @@
                             <label for="exampleFormControlInput1" class="form-label">Pagó con</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">$</span>
-                                <input type="text" class="form-control"
-                                    aria-label="Dollar amount (with dot and two decimal places)" value="559.00" />
+                                <input id="monto" type="text" class="form-control"
+                                    aria-label="Dollar amount (with dot and two decimal places)" />
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Su cambio</label>
-                                <p class="precio-producto">$0.00</p>
+                                <p id="cambio" class="precio-producto">$0.00</p>
                             </div>
                         </div>
                     </div>
@@ -373,7 +373,13 @@
                 total += parseInt(data[i].cantidad) * parseInt(data[i].precioVenta);
             }
             $('#total').val(`$${total}`);
+            $('#totalCobrar').html(`$${total}`);
         }
+
+        $( "#monto" ).blur(function() {
+            const monto = $('#monto').val();
+            $('#cambio').html(`$${monto-total}`);
+        });
 
         $("#addProductoVenta").submit(function(event) {
 
@@ -447,5 +453,40 @@
             });
 
         });
+
+
+        setInterval(showTime, 1000);
+        function showTime() {
+
+            let time = new Date();
+
+            let date = time.getDate();
+            let month = time.getMonth()+1;;
+            let year = time.getFullYear();
+
+            let hour = time.getHours();
+            let min = time.getMinutes();
+            let sec = time.getSeconds();
+            am_pm = "AM";
+        
+            if (hour > 12) {
+                hour -= 12;
+                am_pm = "PM";
+            }
+            if (hour == 0) {
+                hr = 12;
+                am_pm = "AM";
+            }
+        
+            hour = hour < 10 ? "0" + hour : hour;
+            min = min < 10 ? "0" + min : min;
+            sec = sec < 10 ? "0" + sec : sec;
+        
+            let currentTime = `${date}/${month}/${year} ${hour}:${min}:${sec} ${am_pm}`;
+        
+            document.getElementById("fechaHora")
+                    .innerHTML = currentTime;
+        }
+        showTime();
     </script>
 @endsection
