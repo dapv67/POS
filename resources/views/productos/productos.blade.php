@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <table id="tableProductos" class="display" style="width:100%">
+                <table id="tableProductos" class="display table table-striped" style="width:100%">
                     {{-- <thead class="header-table">
                         <tr>
                             <th scope="col">Código de barras</th>
