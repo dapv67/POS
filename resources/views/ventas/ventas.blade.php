@@ -71,13 +71,13 @@
 
         <div class="reports">
             <div class="general">
-                <p class="quantity"><b id="cantidadProductos"></b> productos en la venta actual.</p>
+                <p class="quantity"><b id="cantidadProductos">0</b> productos en la venta actual.</p>
             </div>
             <div class="totals d-flex">
                 <button class="btn btn-primary me-2" type="submit" data-bs-toggle="modal" data-bs-target="#cobrar">
                     F12 - Cobrar
                 </button>
-                <input class="form-control form-control-lg" type="text" placeholder="$0.00" value="$0.00" disabled />
+                <input id="total" name="total" class="form-control form-control-lg" type="text" placeholder="$0.00" value="$0.00" disabled />
             </div>
         </div>
         <!-- Modals -->
@@ -312,7 +312,7 @@
     </div>
 
     <script>
-        let table, contador = 0;
+        let table, contador = 0, total = 0.00;
 
         table = $('#myTable').DataTable({
             dom: 'lrt',
@@ -360,7 +360,19 @@
         function eliminar(e) {
             const row = table.row($(e).parents('tr'));
             const data = row.data();
+            contador -= parseInt(data.cantidad);
+            $('#cantidadProductos').html(contador);
             row.remove().draw();
+            actualizarTotal();
+        }
+
+        function actualizarTotal() {
+            const data = table.rows().data();
+            total = 0;
+            for (let i = 0; i < data.length; i++) {
+                total += parseInt(data[i].cantidad) * parseInt(data[i].precioVenta);
+            }
+            $('#total').val(`$${total}`);
         }
 
         $("#addProductoVenta").submit(function(event) {
@@ -416,6 +428,8 @@
                     contador += parseInt(json.cantidad, 10);
 
                     $('#cantidadProductos').html(contador);
+
+                    actualizarTotal();
                 },
 
                 error: function(err) {
