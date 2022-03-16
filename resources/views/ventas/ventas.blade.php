@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Ventas')
+@section('title', 'Ventas')
 
 @section('content')
     <div class="container">
@@ -30,21 +30,15 @@
 
         <div class="contenido-interno mb-2">
             <div class="tools-interno mb-2">
-                <form class="form-inline d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Código del producto" aria-label="Search" />
+                <form id="addProductoVenta" class="form-inline d-flex">
+                    <input id="cantidad" name="cantidad" class="form-control me-2" type="number" placeholder="Cantidad" value="1"/>
+                    <input autofocus id="codigo" name="codigo" class="form-control me-2" type="text" placeholder="Código del producto" aria-label="Search" />
                     <button class="btn btn-success" type="submit">Agregar</button>
                 </form>
-
-                <div class="filters">
-                    <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal"
-                        data-bs-target="#borrarProducto">
-                        Borrar Art.
-                    </button>
-                </div>
             </div>
 
-            <table id="myTable" class="table">
-                <thead class="header-table">
+            <table id="myTable" class="display" style="width:100%">
+                {{-- <thead class="header-table">
                     <tr>
                         <th scope="col">Código de barras</th>
                         <th scope="col">Descripción del producto</th>
@@ -71,13 +65,13 @@
                         <td>$1198.00</td>
                         <td>5</td>
                     </tr>
-                </tbody>
+                </tbody> --}}
             </table>
         </div>
 
         <div class="reports">
             <div class="general">
-                <p class="quantity">3 productos en la venta actual.</p>
+                <p class="quantity"><b id="cantidadProductos"></b> productos en la venta actual.</p>
             </div>
             <div class="totals d-flex">
                 <button class="btn btn-primary me-2" type="submit" data-bs-toggle="modal" data-bs-target="#cobrar">
@@ -102,8 +96,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
-                            <textarea class="form-control" id="comentarios" rows="3"
-                                placeholder="Ej. Entrada de dinero, etc"></textarea>
+                            <textarea class="form-control" id="comentarios" rows="3" placeholder="Ej. Entrada de dinero, etc"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -319,6 +312,126 @@
     </div>
 
     <script>
-        $('#myTable').DataTable();
+        let table, contador = 0;
+
+        table = $('#myTable').DataTable({
+            dom: 'lrt',
+                    data: {},
+                    columns: [{
+                            title: 'Código',
+                            data: 'codigo',
+                            width: '10%',
+                        },
+                        {
+                            title: 'Producto',
+                            data: 'descripcion',
+                        },
+                        {
+                            title: 'Precio',
+                            data: 'precioVenta'
+                        },
+                        {
+                            title: 'Cantidad',
+                            data: 'cantidad'
+                        },
+                        {
+                            title: 'Importe',
+                            data: 'importe',
+                        },
+                        {
+                            title: 'Existencia',
+                            data: 'existencia'
+                        },
+                        {
+                            title: 'Acciones',
+                            orderable: false,
+                            searchable: false,
+                            width: '10%',
+                            render: function(data, type, row) {
+                                return `<button type="button" onclick="eliminar(this)" class="btn btn-danger">Eliminar</button>`;
+                            }
+                        }
+                    ],
+                    scrollY: '50vh',
+                    scrollCollapse: true,
+                    paging: false,
+        });
+
+        function eliminar(e) {
+            const row = table.row($(e).parents('tr'));
+            const data = row.data();
+            row.remove().draw();
+        }
+
+        $("#addProductoVenta").submit(function(event) {
+
+            event.preventDefault();
+
+            const data = $(this).serialize();
+
+            $.ajax({
+
+                url: 'addProductoVenta',
+                data: data,
+                type: 'GET',
+                dataType: 'json',
+
+                beforeSend: function() {
+
+                    Swal.fire({
+                        title: 'Buscando...',
+                        html: 'Espere un momento',
+                        didOpen: () => {
+                            Swal.showLoading()
+                        }
+                    });
+
+                },
+
+                success: function(json) {
+
+                    Swal.close();
+
+                    let flag = true;
+                    
+                    var rows = table.rows().indexes();
+                    var data = table.rows().data();
+
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].codigo == json.codigo) {
+                            table.cell(rows[i],3).data(parseInt(data[i].cantidad) + parseInt(json.cantidad));
+                            table.cell(rows[i],4).data(parseInt(data[i].importe) + parseInt(json.importe));
+                            flag = false;
+                        }
+                    }
+
+                    if(flag){
+                        table.row.add(json).draw(false);
+                    }
+
+                    $('#addProductoVenta')[0].reset();
+
+                    $( '#codigo' ).focus();
+
+                    contador += parseInt(json.cantidad, 10);
+
+                    $('#cantidadProductos').html(contador);
+                },
+
+                error: function(err) {
+
+                    console.error(err.responseJSON.message);
+
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Ocurrio un error al momento de crear en base de datos',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+
+                },
+            });
+
+        });
     </script>
 @endsection
