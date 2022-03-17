@@ -26,7 +26,11 @@
                 Eliminar
             </button>
         </div>
-        <div class="contenido-interno"></div>
+        <div class="contenido-interno">
+            @include('creditos.catalogo-creditos')
+            @include('creditos.test')
+
+        </div>
 
         <!-- Modals -->
 
@@ -59,22 +63,36 @@
 
         <script>
             //--------------- Menú ------------------------
-            $("#nuevo-credito").click(function(event) {
-                event.preventDefault();
-                $(".contenido-interno").load("./moduls/creditos/nuevo-credito.html");
-            });
-            $("#catalogo-clientes").click(function(event) {
-                event.preventDefault();
-                $(".contenido-interno").load(
-                    "./moduls/clientes/catalogo-clientes.html"
-                );
+            // $("#nuevo-credito").click(function(event) {
+            //     event.preventDefault();
+            //     $(".contenido-interno").load("./moduls/creditos/nuevo-credito.html");
+            // });
+            // $("#catalogo-clientes").click(function(event) {
+            //     event.preventDefault();
+            //     $(".contenido-interno").load(
+            //         "./moduls/clientes/catalogo-clientes.html"
+            //     );
+            // });
+
+            // $(document).ready(function(event) {
+            //     $(".contenido-interno").load(
+            //         "./moduls/creditos/catalogo-creditos.html"
+            //     );
+            // });
+
+            $("#estado-cuenta").click(function(event) {
+                $("#test").hide();
+                $("#catalogoCreditos").show();
+                // getClientes();
             });
 
-            $(document).ready(function(event) {
-                $(".contenido-interno").load(
-                    "./moduls/creditos/catalogo-creditos.html"
-                );
+            $("#nuevo-cliente").click(function(event) {
+                $("#catalogoCreditos").hide();
+                $("#test").show();
+                // getApartados();
             });
+            $("#test").hide();
+            $("#catalogoCreditos").show();
         </script>
     </div>
 @endsection

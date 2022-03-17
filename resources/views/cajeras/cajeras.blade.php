@@ -14,7 +14,7 @@
 
         <div class="tools mb-2">
             <button type="button" class="btn btn-secondary me-2" id="btnCatalogo">
-                Clientes
+                Cajeras
             </button>
             <button type="button" class="btn btn-secondary me-2" id="btnApartado">
                 Apartado
@@ -22,13 +22,13 @@
         </div>
         <div class="contenido-interno">
 
-            @include('clientes.catalogo-clientes')
+            @include('cajeras.catalogo-cajeras')
 
         </div>
 
         <!-- Modals -->
 
-        <!-- Borrar cliente -->
+        <!-- Borrar cajera -->
         <div class="modal fade" id="borrarProducto" tabindex="-1" aria-labelledby="borrarProductoLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -39,8 +39,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">¿Borrar producto
-                                seleccionado?</label>
+                            <label for="exampleFormControlInput1" class="form-label">Eliminar seleccionado?</label>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -48,14 +47,14 @@
                             Cancelar
                         </button>
                         <button type="button" class="btn btn-primary">
-                            Borrar producto
+                            Eliminar
                         </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        @include('clientes.nuevo-cliente')
+        @include('cajeras.nueva-cajera')
 
         <script>
                 

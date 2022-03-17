@@ -1,4 +1,4 @@
-<div id="catalogoCreditos">
+<div id="test">
   <div class="tools-interno mb-2">
   <form class="form-inline d-flex">
     <input
@@ -7,7 +7,7 @@
       placeholder="Nombre"
       aria-label="Search"
     />
-    <button class="btn btn-success" type="submit">Buscar</button>
+    <button class="btn btn-success" type="submit">a</button>
   </form>
 
   <div class="filters d-flex">

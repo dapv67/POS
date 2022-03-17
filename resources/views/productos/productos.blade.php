@@ -385,7 +385,7 @@
                 $("#catalogo").hide();
                 $("#categorias").hide();
                 $("#promociones").show();
-                getPromociones();
+                // getPromociones();
             });
 
             let tableProductos, tableCategorias, tablePromociones;
