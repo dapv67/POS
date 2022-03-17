@@ -23,6 +23,6 @@ class ReportesController extends Controller
      */
     public function index()
     {
-        return view('ventas.ventas');
+        return view('reportes.reportes');
     }
 }
