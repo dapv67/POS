@@ -23,6 +23,6 @@ class CajerasController extends Controller
      */
     public function index()
     {
-        return view('ventas.ventas');
+        return view('cajeras.cajeras');
     }
 }
