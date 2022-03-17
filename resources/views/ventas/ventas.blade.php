@@ -7,7 +7,7 @@
         <div class="header mb-2">
             <h1 class="title-modul">VENTAS - Ticket {{ $cantidad }}</h1>
             <div class="data-shop">
-                <p class="cajero me-4">Le tiende: {{ Auth::user()->name }}</p>
+                <p class="cajero me-4">{{ Auth::user()->name }}</p>
                 <p id="fechaHora" class="hora"></p>
             </div>
         </div>
@@ -37,7 +37,7 @@
                 </form>
             </div>
 
-            <table id="myTable" class="display" style="width:100%">
+            <table id="myTable" class="display table table-striped" style="width:100%">
                 {{-- <thead class="header-table">
                     <tr>
                         <th scope="col">Código de barras</th>
@@ -221,7 +221,7 @@
                             </button>
                         </form>
                         <div class="table-busqueda-productos">
-                            <table class="table">
+                            <table class="display table table-striped" style="width:100%">
                                 <thead class="header-table">
                                     <tr>
                                         <th scope="col">Descripción</th>
@@ -444,7 +444,7 @@
 
                     Swal.fire({
                         title: 'Error!',
-                        text: 'Ocurrio un error al momento de crear en base de datos',
+                        text: 'No se encontró el producto en base de datos',
                         icon: 'error',
                         confirmButtonText: 'Ok'
                     });

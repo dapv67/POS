@@ -27,6 +27,8 @@ Route::get('/categorias', 'ProductosController@categorias')->name('categorias');
 
 
 Route::get('/clientes', 'ClientesController@index')->name('clientes');
+Route::get('/getClientes', 'ClientesController@getClientes')->name('clientes.get');
+Route::post('/addCliente', 'ClientesController@addCliente')->name('clientes.add');
 
 Route::get('/corte', 'CorteController@index')->name('corte');
 

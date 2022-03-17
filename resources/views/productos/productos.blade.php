@@ -7,8 +7,8 @@
         <div class="header mb-2">
             <h1 class="title-modul">PRODUCTOS</h1>
             <div class="data-shop">
-                <p class="cajero me-4">Le tiende: Lizzeth Pérez</p>
-                <p class="hora">01 - Mar 10:25 am</p>
+                <p class="cajero me-4">{{ Auth::user()->name }}</p>
+                <p id="fechaHora" class="hora"></p>
             </div>
         </div>
 
@@ -47,50 +47,8 @@
                     </div>
                 </div>
 
-                <table id="tableProductos" class="display table table-striped" style="width:100%">
-                    {{-- <thead class="header-table">
-                        <tr>
-                            <th scope="col">Código de barras</th>
-                            <th scope="col">Descrip. del producto</th>
-                            <th scope="col">Depto</th>
-                            <th scope="col">Costo</th>
-                            <th scope="col">P. Venta</th>
-                            <th scope="col">P. Mayoreo</th>
-                            <th scope="col">Existencia</th>
-                            <th scope="col">Inv. Mínimo</th>
-                            <th scope="col">Inv. Máximo</th>
-                            <th scope="col">Tipo Venta</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Pantalón Lives azul 32 X 31</td>
-                            <td>Ropa</td>
-                            <td>$499.00</td>
-                            <td>$599.00</td>
-                            <td>$559.00</td>
-                            <td>20</td>
-                            <td>10</td>
-                            <td>30</td>
-                            <td>UNIDAD</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Pantalón Lives azul 32 X 31</td>
-                            <td>Ropa</td>
-                            <td>$499.00</td>
-                            <td>$599.00</td>
-                            <td>$559.00</td>
-                            <td>20</td>
-                            <td>10</td>
-                            <td>30</td>
-                            <td>UNIDAD</td>
-                        </tr>
-                    </tbody> --}}
-                </table>
+                <table id="tableProductos" class="display table table-striped" style="width:100%"></table>
             </div>
-
 
             <div id="categorias" class="row">
                 <div class="col">
@@ -101,7 +59,7 @@
                         </button>
                     </div>
                     <div class="">
-                        <table id="tableCategorias" class="display" style="width:100%"></table>
+                        <table id="tableCategorias" class="display table table-striped" style="width:100%"></table>
                     </div>
                 </div>
             </div>
@@ -127,7 +85,7 @@
                         </div>
                     </div>
                     <div class="datatable mb-2">
-                        <table id="tablePromociones" class="display" style="width:100%">
+                        <table id="tablePromociones" class="display table table-striped" style="width:100%">
                             <thead class="header-table">
                                 <tr>
                                     <th scope="col">Nombre de la promoción</th>
@@ -168,7 +126,8 @@
                     <form id="addProducto">
                         <div class="modal-header">
                             <h5 class="modal-title" id="modalAddProductoLabel">NUEVO PRODUCTO</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -178,11 +137,13 @@
                                 </div>
                                 <div class="mb-3 col">
                                     <label for="descripcion" class="form-label">Descripción</label>
-                                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="" />
+                                    <input type="text" class="form-control" id="descripcion" name="descripcion"
+                                        placeholder="" />
                                 </div>
                                 <div class="mb-3 col">
                                     <label for="categoria" class="form-label">Categoría</label>
-                                    <select id="categoria" name="categoria" class="form-select" aria-label="Default select example">
+                                    <select id="categoria" name="categoria" class="form-select"
+                                        aria-label="Default select example">
                                         <option value="" selected>Seleccionar...</option>
                                         @foreach ($categorias as $categoria)
                                             <option value="{{ $categoria->name }}">{{ $categoria->name }}</option>
@@ -203,14 +164,14 @@
                                     </div>
                                     <div class="form-check me-2">
                                         <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault2"/>
+                                            id="flexRadioDefault2" />
                                         <label class="form-check-label" for="flexRadioDefault2">
                                             A granel
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault3"/>
+                                            id="flexRadioDefault3" />
                                         <label class="form-check-label" for="flexRadioDefault3">
                                             Como paquete
                                         </label>
@@ -220,19 +181,23 @@
                             <div class="row mb-3">
                                 <div class="mb-3 col">
                                     <label for="precioCompra" class="form-label">Precio compra</label>
-                                    <input type="text" class="form-control" id="precioCompra" name="precioCompra" placeholder="" />
+                                    <input type="text" class="form-control" id="precioCompra" name="precioCompra"
+                                        placeholder="" />
                                 </div>
                                 <div class="mb-3 col">
                                     <label for="ganancia" class="form-label">Ganancia</label>
-                                    <input type="text" class="form-control" id="ganancia" name="ganancia" placeholder="" />
+                                    <input type="text" class="form-control" id="ganancia" name="ganancia"
+                                        placeholder="" />
                                 </div>
                                 <div class="mb-3 col">
                                     <label for="precioVenta" class="form-label">Precio venta</label>
-                                    <input type="text" class="form-control" id="precioVenta" name="precioVenta" placeholder="" />
+                                    <input type="text" class="form-control" id="precioVenta" name="precioVenta"
+                                        placeholder="" />
                                 </div>
                                 <div class="mb-3 col">
                                     <label for="precioMayoreo" class="form-label">Precio mayoreo</label>
-                                    <input type="text" class="form-control" id="precioMayoreo" name="precioMayoreo" placeholder="" />
+                                    <input type="text" class="form-control" id="precioMayoreo" name="precioMayoreo"
+                                        placeholder="" />
                                 </div>
                             </div>
                             <label for="exampleFormControlInput1" class="form-label">
@@ -241,7 +206,8 @@
                             <div class="row mb-3">
                                 <div class="mb-3 col">
                                     <label for="existencia" class="form-label">Hay</label>
-                                    <input type="text" class="form-control" id="existencia" name="existencia" placeholder="" />
+                                    <input type="text" class="form-control" id="existencia" name="existencia"
+                                        placeholder="" />
                                 </div>
                                 <div class="mb-3 col">
                                     <label for="minimo" class="form-label">Mínimo</label>
@@ -269,7 +235,8 @@
                     <form id="addCategoria">
                         <div class="modal-header">
                             <h5 class="modal-title" id="modalAddCategoriaLabel">NUEVA CATEGORÍA</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -296,7 +263,8 @@
                     <form id="addPromocion">
                         <div class="modal-header">
                             <h5 class="modal-title" id="modalAddPromocionLabel">NUEVA PROMOCIÓN</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -456,7 +424,7 @@
                             confirmButtonText: 'ok'
                         });
 
-                        tableCategorias.row.add(json).draw(false);
+                        tableProductos.row.add(json).draw(false);
 
                         $('#addProducto')[0].reset();
 
@@ -568,7 +536,7 @@
                             confirmButtonText: 'ok'
                         });
 
-                        tableCategorias.row.add(json).draw(false);
+                        tablePromociones.row.add(json).draw(false);
 
                         $('#addPromocion')[0].reset();
 
@@ -779,22 +747,22 @@
                 }
 
                 $.fn.dataTable.ext.search.push(
-                    function( settings, data, dataIndex ) {
+                    function(settings, data, dataIndex) {
                         var filtroCodigo = $('#filtroCodigo').val();
                         var filtroCategoria = $('#filtroCategoria').val();
                         var codigo = data[2];
                         var categoria = data[4];
-                        console.log(codigo,categoria);
-                        console.log(filtroCodigo,filtroCategoria);
-                
-                        if ( 
-                                ( filtroCategoria === '' && filtroCodigo === '' ) ||
-                                ( filtroCategoria === '' && codigo.includes(filtroCodigo) ) ||
-                                ( categoria.includes(filtroCategoria) && filtroCodigo === '' ) ||
-                                ( categoria.includes(filtroCategoria) && codigo.includes(filtroCodigo) ) 
-                            ) 
+                        console.log(codigo, categoria);
+                        console.log(filtroCodigo, filtroCategoria);
 
-              
+                        if (
+                            (filtroCategoria === '' && filtroCodigo === '') ||
+                            (filtroCategoria === '' && codigo.toLowerCase().includes(filtroCodigo)) ||
+                            (categoria.toLowerCase().includes(filtroCategoria) && filtroCodigo === '') ||
+                            (categoria.toLowerCase().includes(filtroCategoria) && codigo.toLowerCase().includes(filtroCodigo))
+                        )
+
+
                         {
                             return true;
                         }
@@ -947,10 +915,44 @@
                 tableProductos.draw();
             });
 
-            $('#filtroCategoria').change( function() {
+            $('#filtroCategoria').change(function() {
                 tableProductos.draw();
-            } );
-            
+            });
+
+            setInterval(showTime, 1000);
+
+            function showTime() {
+
+                let time = new Date();
+
+                let date = time.getDate();
+                let month = time.getMonth() + 1;;
+                let year = time.getFullYear();
+
+                let hour = time.getHours();
+                let min = time.getMinutes();
+                let sec = time.getSeconds();
+                am_pm = "AM";
+
+                if (hour > 12) {
+                    hour -= 12;
+                    am_pm = "PM";
+                }
+                if (hour == 0) {
+                    hr = 12;
+                    am_pm = "AM";
+                }
+
+                hour = hour < 10 ? "0" + hour : hour;
+                min = min < 10 ? "0" + min : min;
+                sec = sec < 10 ? "0" + sec : sec;
+
+                let currentTime = `${date}/${month}/${year} ${hour}:${min}:${sec} ${am_pm}`;
+
+                document.getElementById("fechaHora")
+                    .innerHTML = currentTime;
+            }
+            showTime();
         </script>
     </div>
 @endsection
