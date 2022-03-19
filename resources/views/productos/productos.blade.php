@@ -26,24 +26,27 @@
         <div class="contenido-interno">
 
             <div id="catalogo" class="row">
-                <div class="tools mb-2">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddProducto">
-                        Nuevo
-                    </button>
-                </div>
+                
                 <div class="tools-interno mb-2">
-                    <div class="form-inline d-flex">
-                        <input id="filtroCodigo" class="form-control me-2" type="search" placeholder="Código del producto"
-                            aria-label="Search" />
+                    <div class="d-flex">
+                        <div class="me-2">
+                            <input type="search" class="form-control" id="filtroCodigo" placeholder="Código del producto" aria-label="Search">
+                        </div>
+                        <div class="">
+                            <select id="filtroCategoria" class="form-select" aria-label="Default select example">
+                                <option value="" selected>Categoría</option>
+                                @foreach ($categorias as $categoria)
+                                    <option value="{{ $categoria->name }}">{{ $categoria->name }}</option>
+                                @endforeach
+                            </select>                        
+                        </div>
                     </div>
 
-                    <div class="filters d-flex">
-                        <select id="filtroCategoria" class="form-select" aria-label="Default select example">
-                            <option value="" selected>Categoría</option>
-                            @foreach ($categorias as $categoria)
-                                <option value="{{ $categoria->name }}">{{ $categoria->name }}</option>
-                            @endforeach
-                        </select>
+                    <div class="filters">
+                        
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddProducto">
+                            Nuevo
+                        </button>
                     </div>
                 </div>
 

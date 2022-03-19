@@ -1,162 +1,171 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  margin: 0;
-  height: auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    margin: 0;
+    height: auto;
 }
 h1,
 h2 {
-  margin: 0;
+    margin: 0;
 }
 a {
-  text-decoration: none;
-  cursor: pointer;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /* -------------------------------- MAIN SECTION ------------------------------------ */
 main {
-  background-color: #dedede;
-  min-height: 100vh;
-  display: flex;
+    background-color: #dedede;
+    min-height: 100vh;
+    display: flex;
 }
 /* sidenav */
 .menu {
-  min-width: 18%;
-  background-color: #f8f9fa;
-  padding: 1rem;
+    min-width: 18%;
+    background-color: #f8f9fa;
+    padding: 1rem;
 }
 .ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 .link-nav {
-  border-radius: 0.25rem;
-  display: block;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  color: #4d4949;
+    border-radius: 0.25rem;
+    display: block;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    color: #4d4949;
 }
 .active {
-  background-color: #0d6efd;
-  color: white;
+    background-color: #0d6efd;
+    color: white;
 }
 
 /* contenido  */
 .contenedor {
-  width: 82%;
-  padding: 1rem;
+    width: 82%;
+    padding: 1rem;
 }
 
 /*----------------------- ventas -------------------------*/
 /* header */
 .title-modul {
-  color: #615f5f;
+    color: #615f5f;
 }
 .header {
-  background-color: #f8f9fa;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  display: flex;
-  justify-content: space-between;
+    background-color: #f8f9fa;
+    padding: 0.5rem 2rem;
+    border-radius: 0.25rem;
+    display: flex;
+    justify-content: space-between;
 }
 .data-shop {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #615f5f;
-  display: flex;
-  align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #615f5f;
+    display: flex;
+    align-items: center;
 }
 .data-shop p {
-  margin: 0;
+    margin: 0;
 }
 /* tools */
 .tools {
-  background-color: #f8f9fa;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
+    background-color: #f8f9fa;
+    padding: 0.5rem 2rem;
+    border-radius: 0.25rem;
 }
 /* search */
 .search {
-  display: flex;
+    display: flex;
 }
 /* table */
 .header-table {
-  background-color: rgb(241, 238, 238);
+    background-color: rgb(241, 238, 238);
 }
 /* reports */
 .reports {
-  background-color: #f8f9fa;
-  padding: 0.5rem 2rem;
-  border-radius: 0.25rem;
-  height: auto;
-  display: flex;
-  justify-content: space-between;
+    background-color: #f8f9fa;
+    padding: 0.5rem 2rem;
+    border-radius: 0.25rem;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
 }
 .general {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 .quantity {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #101894;
-  margin: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #101894;
+    margin: 0;
 }
 .totals input {
-  font-size: 2.2rem;
-  font-weight: 600;
-  color: #0d6efd;
-  max-width: 16rem;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #0d6efd;
+    max-width: 16rem;
 }
 /* modal verificador-precios */
 .details-precio {
-  text-align: center;
-  padding: 2rem;
+    text-align: center;
+    padding: 2rem;
 }
 .nombre-producto {
-  font-size: 2rem;
+    font-size: 2rem;
 }
 .precio-producto {
-  font-size: 3.5rem;
-  color: #0d6efd;
+    font-size: 3.5rem;
+    color: #0d6efd;
 }
 /* modal table-busqueda-productos */
 .leyenda-busqueda {
-  font-size: 0.9rem;
+    font-size: 0.9rem;
 }
 /* ----------------- Productos ---------------------- */
 .tools-interno {
-  display: flex;
-  justify-content: space-between;
-}
-.tools-interno form {
-  max-width: 50%;
-}
-.filters {
-  max-width: 50%;
-  display: flex;
+    display: flex;
+    justify-content: space-between;
 }
 /* nuevo-producto */
 .subtitle-modul {
-  color: #615f5f;
+    color: #615f5f;
 }
 /* categorias-productos */
 .header-categoria-nueva {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 /* ----------------------- Corte de Caja ----------------*/
 /* caja interno para todos los modulos */
 .contenido-interno {
-  background-color: #f8f9fa;
-  padding: 2rem;
-  border-radius: 0.25rem;
-  min-height: 30rem;
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 0.25rem;
+    min-height: 30rem;
 }
 
 /* corte de caja */
 .header-corte {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+}
+/*  prestamos */
+.estado-cuenta {
+    width: 25rem;
+    margin: 0 auto;
+}
+.encabezado-estado-cliente {
+    display: flex;
+    justify-content: space-between;
+}
+.tabla-prestamos {
+    display: flex;
+    width: 100%;
+}
+.tabla-prestamos .mes {
+    width: 15%;
 }

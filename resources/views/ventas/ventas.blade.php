@@ -30,7 +30,7 @@
 
         <div class="contenido-interno mb-2">
             <div class="tools-interno mb-2">
-                <form id="addProductoVenta" class="form-inline d-flex">
+                <form id="addProductoVenta" class="d-flex">
                     <input id="cantidad" name="cantidad" class="form-control me-2" type="number" placeholder="Cantidad" value="1"/>
                     <input autofocus id="codigo" name="codigo" class="form-control me-2" type="text" placeholder="Código del producto" aria-label="Search" />
                     <button class="btn btn-success" type="submit">Agregar</button>
@@ -316,45 +316,45 @@
 
         table = $('#myTable').DataTable({
             dom: 'lrt',
-                    data: {},
-                    columns: [{
-                            title: 'Código',
-                            data: 'codigo',
-                            width: '10%',
-                        },
-                        {
-                            title: 'Producto',
-                            data: 'descripcion',
-                        },
-                        {
-                            title: 'Precio',
-                            data: 'precioVenta'
-                        },
-                        {
-                            title: 'Cantidad',
-                            data: 'cantidad'
-                        },
-                        {
-                            title: 'Importe',
-                            data: 'importe',
-                        },
-                        {
-                            title: 'Existencia',
-                            data: 'existencia'
-                        },
-                        {
-                            title: 'Acciones',
-                            orderable: false,
-                            searchable: false,
-                            width: '10%',
-                            render: function(data, type, row) {
-                                return `<button type="button" onclick="eliminar(this)" class="btn btn-danger">Eliminar</button>`;
-                            }
-                        }
-                    ],
-                    scrollY: '50vh',
-                    scrollCollapse: true,
-                    paging: false,
+            data: {},
+            columns: [{
+                    title: 'Código',
+                    data: 'codigo',
+                    width: '10%',
+                },
+                {
+                    title: 'Producto',
+                    data: 'descripcion',
+                },
+                {
+                    title: 'Precio',
+                    data: 'precioVenta'
+                },
+                {
+                    title: 'Cantidad',
+                    data: 'cantidad'
+                },
+                {
+                    title: 'Importe',
+                    data: 'importe',
+                },
+                {
+                    title: 'Existencia',
+                    data: 'existencia'
+                },
+                {
+                    title: 'Acciones',
+                    orderable: false,
+                    searchable: false,
+                    width: '10%',
+                    render: function(data, type, row) {
+                        return `<button type="button" onclick="eliminar(this)" class="btn btn-danger">Eliminar</button>`;
+                    }
+                }
+            ],
+            scrollY: '50vh',
+            scrollCollapse: true,
+            paging: false,
         });
 
         function eliminar(e) {
