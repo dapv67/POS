@@ -26,11 +26,12 @@
         <div class="contenido-interno">
 
             <div id="catalogo" class="row">
-                
+
                 <div class="tools-interno mb-2">
                     <div class="d-flex">
                         <div class="me-2">
-                            <input type="search" class="form-control" id="filtroCodigo" placeholder="Código del producto" aria-label="Search">
+                            <input type="search" class="form-control" id="filtroCodigo" placeholder="Código del producto"
+                                aria-label="Search">
                         </div>
                         <div class="">
                             <select id="filtroCategoria" class="form-select" aria-label="Default select example">
@@ -38,13 +39,14 @@
                                 @foreach ($categorias as $categoria)
                                     <option value="{{ $categoria->name }}">{{ $categoria->name }}</option>
                                 @endforeach
-                            </select>                        
+                            </select>
                         </div>
                     </div>
 
                     <div class="filters">
-                        
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddProducto">
+
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#modalAddProducto">
                             Nuevo
                         </button>
                     </div>
@@ -424,7 +426,8 @@
                             title: 'OK!',
                             text: 'Producto creado',
                             icon: 'success',
-                            confirmButtonText: 'ok'
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
                         });
 
                         tableProductos.row.add(json).draw(false);
@@ -441,7 +444,8 @@
                             title: 'Error!',
                             text: 'Ocurrio un error al momento de crear en base de datos',
                             icon: 'error',
-                            confirmButtonText: 'Ok'
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
                         });
 
                     },
@@ -480,7 +484,8 @@
                             title: 'OK!',
                             text: 'Categoría creada',
                             icon: 'success',
-                            confirmButtonText: 'ok'
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
                         });
 
                         tableCategorias.row.add(json).draw(false);
@@ -497,7 +502,8 @@
                             title: 'Error!',
                             text: 'Ocurrio un error al momento de crear en base de datos',
                             icon: 'error',
-                            confirmButtonText: 'Ok'
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
                         });
 
                     },
@@ -536,7 +542,8 @@
                             title: 'OK!',
                             text: 'Promoción creada',
                             icon: 'success',
-                            confirmButtonText: 'ok'
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
                         });
 
                         tablePromociones.row.add(json).draw(false);
@@ -553,7 +560,8 @@
                             title: 'Error!',
                             text: 'Ocurrio un error al momento de crear en base de datos',
                             icon: 'error',
-                            confirmButtonText: 'Ok'
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
                         });
 
                     },
@@ -596,7 +604,8 @@
                             title: 'Error!',
                             text: 'Ocurrio un error al momento de descargar de base de datos',
                             icon: 'error',
-                            confirmButtonText: 'Ok'
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
                         });
 
                     },
@@ -639,7 +648,8 @@
                             title: 'Error!',
                             text: 'Ocurrio un error al momento de descargar de base de datos',
                             icon: 'error',
-                            confirmButtonText: 'Ok'
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
                         });
 
                     },
@@ -682,10 +692,78 @@
                             title: 'Error!',
                             text: 'Ocurrio un error al momento de descargar de base de datos',
                             icon: 'error',
-                            confirmButtonText: 'Ok'
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
                         });
 
                     },
+                });
+
+            }
+
+            function eliminarProducto(e) {
+                const row = tableProductos.row($(e).parents('tr'));
+                const data = row.data();
+
+                Swal.fire({
+                    icon: 'warning',
+                    title: '¿Desea eliminar el producto?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Eliminar',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#000',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+
+                            url: 'deleteProducto',
+                            data: {
+                                id: data.id
+                            },
+                            type: 'POST',
+
+                            beforeSend: function() {
+
+                                Swal.fire({
+                                    title: 'Eliminando...',
+                                    html: 'Espere un momento',
+                                    didOpen: () => {
+                                        Swal.showLoading()
+                                    }
+                                });
+
+                            },
+
+                            success: function(json) {
+
+                                Swal.fire({
+                                    title: 'OK!',
+                                    text: 'Producto eliminado',
+                                    icon: 'success',
+                                    confirmButtonText: 'Ok',
+                                    confirmButtonColor: '#000',
+                                });
+
+                                row.remove().draw();
+
+                            },
+
+                            error: function(err) {
+
+                                console.error(err.responseJSON.message);
+
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Ocurrio un error al momento de eliminar en base de datos',
+                                    icon: 'error',
+                                    confirmButtonText: 'Ok',
+                                    confirmButtonColor: '#000',
+                                });
+
+                            },
+                        });
+                    }
                 });
 
             }
@@ -694,51 +772,134 @@
                 const row = tableCategorias.row($(e).parents('tr'));
                 const data = row.data();
 
-                $.ajax({
+                Swal.fire({
+                    icon: 'warning',
+                    title: '¿Desea eliminar la categoría?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Eliminar',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#000',
+                }).then((result) => {
+                    if (result.isConfirmed) {
 
-                    url: 'deleteCategoria',
-                    data: {
-                        id: data.id
-                    },
-                    type: 'POST',
+                        $.ajax({
 
-                    beforeSend: function() {
+                            url: 'deleteCategoria',
+                            data: {
+                                id: data.id
+                            },
+                            type: 'POST',
 
-                        Swal.fire({
-                            title: 'Eliminando...',
-                            html: 'Espere un momento',
-                            didOpen: () => {
-                                Swal.showLoading()
-                            }
+                            beforeSend: function() {
+
+                                Swal.fire({
+                                    title: 'Eliminando...',
+                                    html: 'Espere un momento',
+                                    didOpen: () => {
+                                        Swal.showLoading()
+                                    }
+                                });
+
+                            },
+
+                            success: function(json) {
+
+                                Swal.fire({
+                                    title: 'OK!',
+                                    text: 'Categoría eliminada',
+                                    icon: 'success',
+                                    confirmButtonText: 'Ok',
+                                    confirmButtonColor: '#000',
+                                });
+
+                                row.remove().draw();
+
+                            },
+
+                            error: function(err) {
+
+                                console.error(err.responseJSON.message);
+
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Ocurrio un error al momento de eliminar en base de datos',
+                                    icon: 'error',
+                                    confirmButtonText: 'Ok',
+                                    confirmButtonColor: '#000',
+                                });
+
+                            },
                         });
+                    }
+                });
 
-                    },
+            }
 
-                    success: function(json) {
+            function eliminarPromocion(e) {
+                const row = tablePromociones.row($(e).parents('tr'));
+                const data = row.data();
 
-                        Swal.fire({
-                            title: 'OK!',
-                            text: 'Categoría eliminada',
-                            icon: 'success',
-                            confirmButtonText: 'ok'
+                Swal.fire({
+                    icon: 'warning',
+                    title: '¿Desea eliminar la promoción?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Eliminar',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#000',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+
+                            url: 'deletePromocion',
+                            data: {
+                                id: data.id
+                            },
+                            type: 'POST',
+
+                            beforeSend: function() {
+
+                                Swal.fire({
+                                    title: 'Eliminando...',
+                                    html: 'Espere un momento',
+                                    didOpen: () => {
+                                        Swal.showLoading()
+                                    }
+                                });
+
+                            },
+
+                            success: function(json) {
+
+                                Swal.fire({
+                                    title: 'OK!',
+                                    text: 'Promoción eliminada',
+                                    icon: 'success',
+                                    confirmButtonText: 'Ok',
+                                    confirmButtonColor: '#000',
+                                });
+
+                                row.remove().draw();
+
+                            },
+
+                            error: function(err) {
+
+                                console.error(err.responseJSON.message);
+
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Ocurrio un error al momento de eliminar en base de datos',
+                                    icon: 'error',
+                                    confirmButtonText: 'Ok',
+                                    confirmButtonColor: '#000',
+                                });
+
+                            },
                         });
-
-                        row.remove().draw();
-
-                    },
-
-                    error: function(err) {
-
-                        console.error(err.responseJSON.message);
-
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Ocurrio un error al momento de crear en base de datos',
-                            icon: 'error',
-                            confirmButtonText: 'Ok'
-                        });
-
-                    },
+                    }
                 });
 
             }
@@ -762,7 +923,8 @@
                             (filtroCategoria === '' && filtroCodigo === '') ||
                             (filtroCategoria === '' && codigo.toLowerCase().includes(filtroCodigo)) ||
                             (categoria.toLowerCase().includes(filtroCategoria) && filtroCodigo === '') ||
-                            (categoria.toLowerCase().includes(filtroCategoria) && codigo.toLowerCase().includes(filtroCodigo))
+                            (categoria.toLowerCase().includes(filtroCategoria) && codigo.toLowerCase().includes(
+                                filtroCodigo))
                         )
 
 

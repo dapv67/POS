@@ -58,7 +58,6 @@
         @include('clientes.nuevo-cliente')
 
         <script>
-                
             let tableClientes, tableApartados;
 
             $("#btnCatalogo").click(function(event) {
@@ -104,7 +103,8 @@
                             title: 'OK!',
                             text: 'Cliente creado',
                             icon: 'success',
-                            confirmButtonText: 'ok'
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
                         });
 
                         tableClientes.row.add(json).draw(false);
@@ -121,7 +121,8 @@
                             title: 'Error!',
                             text: 'Ocurrio un error al momento de crear en base de datos',
                             icon: 'error',
-                            confirmButtonText: 'Ok'
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
                         });
 
                     },
@@ -164,7 +165,8 @@
                             title: 'Error!',
                             text: 'Ocurrio un error al momento de descargar de base de datos',
                             icon: 'error',
-                            confirmButtonText: 'Ok'
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
                         });
 
                     },
@@ -207,7 +209,8 @@
                             title: 'Error!',
                             text: 'Ocurrio un error al momento de descargar de base de datos',
                             icon: 'error',
-                            confirmButtonText: 'Ok'
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
                         });
 
                     },
@@ -315,7 +318,7 @@
                             searchable: false,
                             width: '10%',
                             render: function(data, type, row) {
-                                return `<button type="button" onclick="eliminarProducto(this)" class="btn btn-danger">Eliminar</button>`;
+                                return `<button type="button" onclick="eliminarCliente(this)" class="btn btn-danger">Eliminar</button>`;
                             }
                         }
                     ],
@@ -358,6 +361,74 @@
                     paging: false
                 });
 
+
+            }
+
+            function eliminarCliente(e) {
+                const row = tableClientes.row($(e).parents('tr'));
+                const data = row.data();
+
+                Swal.fire({
+                    icon: 'warning',
+                    title: '¿Desea eliminar el cliente?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Eliminar',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#000',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+
+                            url: 'deleteCliente',
+                            data: {
+                                id: data.id
+                            },
+                            type: 'POST',
+
+                            beforeSend: function() {
+
+                                Swal.fire({
+                                    title: 'Eliminando...',
+                                    html: 'Espere un momento',
+                                    didOpen: () => {
+                                        Swal.showLoading()
+                                    }
+                                });
+
+                            },
+
+                            success: function(json) {
+
+                                Swal.fire({
+                                    title: 'OK!',
+                                    text: 'Cliente eliminado',
+                                    icon: 'success',
+                                    confirmButtonText: 'Ok',
+                                    confirmButtonColor: '#000',
+                                });
+
+                                row.remove().draw();
+
+                            },
+
+                            error: function(err) {
+
+                                console.error(err.responseJSON.message);
+
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Ocurrio un error al momento de eliminar en base de datos',
+                                    icon: 'error',
+                                    confirmButtonText: 'Ok',
+                                    confirmButtonColor: '#000',
+                                });
+
+                            },
+                        });
+                    }
+                });
 
             }
 

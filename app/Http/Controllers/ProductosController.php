@@ -66,6 +66,15 @@ class ProductosController extends Controller
         return $producto;
     }
 
+    public function deleteProducto(Request $request)
+    {
+        $id = $request->id;
+
+        $deleted = Producto::find($id)->delete();
+
+        return response('Producto eliminado', 200)->header('Content-Type', 'text/plain');
+    }
+
     public function categorias()
     {
         $categorias = Categoria::all();
@@ -105,5 +114,23 @@ class ProductosController extends Controller
         $promociones = Promocion::all();
         
         return $promociones;
+    }
+
+    public function addPromocion(Request $request)
+    {
+        $name = $request->promocion;
+ 
+        $promocion = Promocion::create(['name' => $name]);
+        
+        return $promocion;
+    }
+
+    public function deletePromocion(Request $request)
+    {
+        $id = $request->id;
+
+        $deleted = Promocion::find($id)->delete();
+
+        return response('Promocion eliminada', 200)->header('Content-Type', 'text/plain');
     }
 }

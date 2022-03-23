@@ -69,4 +69,13 @@ class ClientesController extends Controller
         
         return $cliente;
     }
+
+    public function deleteCliente(Request $request)
+    {
+        $id = $request->id;
+
+        $deleted = Cliente::find($id)->delete();
+
+        return response('Cliente eliminado', 200)->header('Content-Type', 'text/plain');
+    }
 }

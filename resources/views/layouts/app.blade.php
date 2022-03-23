@@ -18,7 +18,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
     
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -111,6 +111,7 @@
                         </a>
                         <hr />
                         <ul class="ul">
+                            @hasanyrole('admin|cajera')
                             <li class="item-nav" id="ventas">
                                 <a href="{{ route('ventas') }}"
                                     class="link-nav {{ Route::currentRouteName() == 'ventas' ? 'active' : '' }}">
@@ -119,6 +120,8 @@
                                         width="16" height="16" alt="icon-nav" />
                                     Ventas</a>
                             </li>
+                            @endhasanyrole
+                            @role('admin')
                             <li class="item-nav" id="productos">
                                 <a href="{{ route('productos') }}"
                                     class="link-nav {{ Route::currentRouteName() == 'productos' ? 'active' : '' }}">
@@ -183,7 +186,7 @@
                                         width="16" height="16" alt="icon-nav" />
                                     Prestamos</a>
                             </li>
-
+                            @endrole
                             <li class="item-nav">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">

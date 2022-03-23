@@ -1,10 +1,9 @@
-<div class="modal fade" id="modalAddCliente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="modalAddClienteLabel" aria-hidden="true">
+<div class="modal" tabindex="-1" id="modalAddCajera">
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
-            <form id="addCliente">
+            <form id="addCajera">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalAddClienteLabel">NUEVA CAJERA(O)</h5>
+                    <h5 class="modal-title" id="modalAddCajeraLabel">NUEVA CAJERA(O)</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
