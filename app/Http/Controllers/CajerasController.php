@@ -32,7 +32,8 @@ class CajerasController extends Controller
     public function getCajeras()
     {
 
-        $cajeras = User::all();
+        // $cajeras = User::all();
+        $cajeras = User::role('cajera')->get();
         
         return $cajeras;
     }
