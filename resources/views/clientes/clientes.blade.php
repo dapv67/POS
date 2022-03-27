@@ -58,6 +58,8 @@
         @include('clientes.nuevo-cliente')
 
         <script>
+            const modalAdd = new bootstrap.Modal(document.getElementById('modalAddCliente'),{backdrop: 'static'});
+            
             let tableClientes, tableApartados;
 
             $("#btnCatalogo").click(function(event) {
@@ -111,6 +113,7 @@
 
                         $('#addCliente')[0].reset();
 
+                        modalAdd.hide();
                     },
 
                     error: function(err) {

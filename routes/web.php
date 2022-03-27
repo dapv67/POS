@@ -15,6 +15,7 @@ Route::get('/productos', 'ProductosController@index')->name('productos');
 Route::get('/getProductos', 'ProductosController@getProductos')->name('productos.get');
 Route::post('/addProducto', 'ProductosController@addProducto')->name('productos.add');
 Route::post('/deleteProducto', 'ProductosController@deleteProducto')->name('productos.delete');
+Route::post('/actualizarProducto', 'ProductosController@actualizarProducto')->name('productos.actualizar');
 
 Route::get('/getCategorias', 'ProductosController@getCategorias')->name('categorias.get');
 Route::post('/addCategoria', 'ProductosController@addCategoria')->name('categorias.add');

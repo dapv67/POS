@@ -22,7 +22,7 @@ class ProductosController extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-
+        
         return view('productos.productos', compact('categorias'));
     }
 
@@ -30,7 +30,7 @@ class ProductosController extends Controller
     {
 
         $productos = Producto::all();
-        
+
         return $productos;
     }
 
@@ -47,7 +47,7 @@ class ProductosController extends Controller
         $unidad = $request->unidad | 0;
         $minimo = $request->minimo;
         $maximo = $request->maximo;
- 
+
         $producto = Producto::create(
             [
                 'id_categoria' => $id_categoria,
@@ -62,7 +62,28 @@ class ProductosController extends Controller
                 'maximo' => $maximo,
             ]
         );
-        
+
+        return $producto;
+    }
+
+    public function actualizarProducto(Request $request)
+    {
+
+        $id = $request->idActualizar;
+        $precio_compra = $request->precioCompraActualizar;
+        $precio_venta = $request->precioVentaActualizar;
+        $minimo = $request->minimoActualizar;
+        $maximo = $request->maximoActualizar;
+
+        $producto = Producto::find($id);
+
+        $producto->precio_compra = $precio_compra;
+        $producto->precio_venta = $precio_venta;
+        $producto->minimo = $minimo;
+        $producto->maximo = $maximo;
+
+        $producto->save();
+
         return $producto;
     }
 
@@ -86,16 +107,16 @@ class ProductosController extends Controller
     {
 
         $categorias = Categoria::all();
-        
+
         return $categorias;
     }
 
     public function addCategoria(Request $request)
     {
         $name = $request->categoria;
- 
+
         $categoria = Categoria::create(['name' => $name]);
-        
+
         return $categoria;
     }
 
@@ -112,16 +133,16 @@ class ProductosController extends Controller
     {
 
         $promociones = Promocion::all();
-        
+
         return $promociones;
     }
 
     public function addPromocion(Request $request)
     {
         $name = $request->promocion;
- 
+
         $promocion = Promocion::create(['name' => $name]);
-        
+
         return $promocion;
     }
 

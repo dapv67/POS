@@ -1,5 +1,4 @@
-<div class="modal fade" id="modalAddCliente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="modalAddClienteLabel" aria-hidden="true">
+<div class="modal" tabindex="-1" id="modalAddCliente">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <form id="addCliente">

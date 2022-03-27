@@ -20,4 +20,9 @@ class Producto extends Model
         'minimo',
         'maximo',
     ];
+
+    public function categoria()
+    {
+        return $this->belongsTo('App\Categoria', 'id_categoria');
+    }
 }

@@ -124,8 +124,7 @@
         </div>
 
         <!-- Modals -->
-        <div class="modal fade" id="modalAddProducto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="modalAddProductoLabel" aria-hidden="true">
+        <div class="modal" tabindex="-1" id="modalAddProducto">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
                     <form id="addProducto">
@@ -233,8 +232,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="modalAddCategoria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="modalAddCategoriaLabel" aria-hidden="true">
+        <div class="modal" tabindex="-1" id="modalAddCategoria">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <form id="addCategoria">
@@ -261,8 +259,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="modalAddPromocion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="modalAddPromocionLabel" aria-hidden="true">
+        <div class="modal" tabindex="-1" id="modalAddPromocion">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
                     <form id="addPromocion">
@@ -342,35 +339,81 @@
             </div>
         </div>
 
-
+        <div class="modal" tabindex="-1" id="modalActualizarProducto">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <form id="actualizarProducto">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalActualizarProductoLabel">ACTUALIZAR PRODUCTO</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" class="form-control" id="idActualizar"
+                                        name="idActualizar" hidden/>
+                            <div class="row mb-3">
+                                <div class="mb-3 col">
+                                    <label for="precioCompraActualizar" class="form-label">Precio compra</label>
+                                    <input type="text" class="form-control" id="precioCompraActualizar"
+                                        name="precioCompraActualizar" placeholder="" />
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="gananciaActualizar" class="form-label">Ganancia</label>
+                                    <input type="text" class="form-control" id="gananciaActualizar"
+                                        name="gananciaActualizar" placeholder="" />
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="precioVentaActualizar" class="form-label">Precio venta</label>
+                                    <input type="text" class="form-control" id="precioVentaActualizar"
+                                        name="precioVentaActualizar" placeholder="" />
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="precioMayoreoActualizar" class="form-label">Precio mayoreo</label>
+                                    <input type="text" class="form-control" id="precioMayoreoActualizar"
+                                        name="precioMayoreoActualizar" placeholder="" />
+                                </div>
+                            </div>
+                            <label for="exampleFormControlInput1" class="form-label">
+                                <strong>Inventario</strong>
+                            </label>
+                            <div class="row mb-3">
+                                <div class="mb-3 col">
+                                    <label for="minimoActualizar" class="form-label">Mínimo</label>
+                                    <input type="text" class="form-control" id="minimoActualizar" name="minimoActualizar"
+                                        placeholder="" />
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="maximoActualizar" class="form-label">Máximo</label>
+                                    <input type="text" class="form-control" id="maximoActualizar" name="maximoActualizar"
+                                        placeholder="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <script>
-            //--------------- Menú ------------------------
-            // $("#nuevo").click(function(event) {
-            //     event.preventDefault();
-            //     $(".contenido-interno").load("{{ asset('html/nuevo-producto.html') }}");
-            // });
+            const modalAddProducto = new bootstrap.Modal(document.getElementById('modalAddProducto'), {
+                backdrop: 'static'
+            });
+            const modalAddCategoria = new bootstrap.Modal(document.getElementById('modalAddCategoria'), {
+                backdrop: 'static'
+            });
+            const modalAddPromocion = new bootstrap.Modal(document.getElementById('modalAddPromocion'), {
+                backdrop: 'static'
+            });
+            const modalActualizarProducto = new bootstrap.Modal(document.getElementById('modalActualizarProducto'), {
+                backdrop: 'static'
+            });
 
-            // $("#categorias").click(function(event) {
-            //     event.preventDefault();
-            //     $(".contenido-interno").load("{{ asset('html/categorias.html') }}");
-            // });
-            // $("#promociones").click(function(event) {
-            //     event.preventDefault();
-            //     $(".contenido-interno").load("{{ asset('html/promociones.html') }}");
-            // });
-            // $("#catalogo").click(function(event) {
-            //     event.preventDefault();
-            //     $(".contenido-interno").load(
-            //         "{{ asset('html/catalogo-productos.blade.php') }}"
-            //     );
-            // });
 
-            // $(document).ready(function(event) {
-            //     $(".contenido-interno").load(
-            //         "{{ asset('html/catalogo-productos.blade.php') }}"
-            //     );
-            // });
+            let tableProductos, tableCategorias, tablePromociones, row;
 
             $("#btnCatalogo").click(function(event) {
                 $("#promociones").hide();
@@ -392,8 +435,6 @@
                 $("#promociones").show();
                 // getPromociones();
             });
-
-            let tableProductos, tableCategorias, tablePromociones;
 
             $("#addProducto").submit(function(event) {
 
@@ -434,6 +475,7 @@
 
                         $('#addProducto')[0].reset();
 
+                        modalAddProducto.hide();
                     },
 
                     error: function(err) {
@@ -492,6 +534,7 @@
 
                         $('#addCategoria')[0].reset();
 
+                        modalAddCategoria.hide();
                     },
 
                     error: function(err) {
@@ -550,6 +593,7 @@
 
                         $('#addPromocion')[0].reset();
 
+                        modalAddPromocion.hide();
                     },
 
                     error: function(err) {
@@ -559,6 +603,63 @@
                         Swal.fire({
                             title: 'Error!',
                             text: 'Ocurrio un error al momento de crear en base de datos',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
+                        });
+
+                    },
+                });
+
+            });
+
+            $("#actualizarProducto").submit(function(event) {
+
+                event.preventDefault();
+
+                const data = $(this).serialize();
+
+                $.ajax({
+
+                    url: 'actualizarProducto',
+                    data: data,
+                    type: 'POST',
+                    dataType: 'json',
+
+                    beforeSend: function() {
+
+                        Swal.fire({
+                            title: 'Actualizando...',
+                            html: 'Espere un momento',
+                            didOpen: () => {
+                                Swal.showLoading()
+                            }
+                        });
+
+                    },
+
+                    success: function(json) {
+
+                        Swal.fire({
+                            title: 'OK!',
+                            text: 'Producto actualizado',
+                            icon: 'success',
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
+                        });
+
+                        row.data(json);
+
+                        modalActualizarProducto.hide();
+                    },
+
+                    error: function(err) {
+
+                        console.error(err.responseJSON.message);
+
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Ocurrio un error al momento de actualizar en base de datos',
                             icon: 'error',
                             confirmButtonText: 'Ok',
                             confirmButtonColor: '#000',
@@ -701,8 +802,24 @@
 
             }
 
+            function actualizarProducto(e) {
+                row = tableProductos.row($(e).parents('tr'));
+                const data = row.data();
+
+                $('#idActualizar').val(data.id);
+                $('#maximoActualizar').val(data.maximo);
+                $('#minimoActualizar').val(data.minimo);
+                $('#precioCompraActualizar').val(data.precio_compra);
+                $('#precioVentaActualizar').val(data.precio_venta);
+
+                console.log(data);
+
+                modalActualizarProducto.show();
+
+            }
+
             function eliminarProducto(e) {
-                const row = tableProductos.row($(e).parents('tr'));
+                row = tableProductos.row($(e).parents('tr'));
                 const data = row.data();
 
                 Swal.fire({
@@ -769,7 +886,7 @@
             }
 
             function eliminarCategoria(e) {
-                const row = tableCategorias.row($(e).parents('tr'));
+                row = tableCategorias.row($(e).parents('tr'));
                 const data = row.data();
 
                 Swal.fire({
@@ -837,7 +954,7 @@
             }
 
             function eliminarPromocion(e) {
-                const row = tablePromociones.row($(e).parents('tr'));
+                row = tablePromociones.row($(e).parents('tr'));
                 const data = row.data();
 
                 Swal.fire({
@@ -942,6 +1059,7 @@
                             title: 'ID',
                             data: 'id',
                             width: '5%',
+                            visible: false
                         },
                         {
                             title: 'id_categoria',
@@ -949,15 +1067,15 @@
                             visible: false
                         },
                         {
-                            title: 'codigo',
+                            title: 'Código',
                             data: 'codigo'
                         },
                         {
-                            title: 'descripcion',
+                            title: 'Descripcion',
                             data: 'descripcion'
                         },
                         {
-                            title: 'categoria',
+                            title: 'Categoria',
                             data: 'categoria'
                         },
                         {
@@ -966,11 +1084,14 @@
                             visible: false
                         },
                         {
-                            title: 'precio_venta',
-                            data: 'precio_venta'
+                            title: 'Precio',
+                            data: 'precio_venta',
+                            render: function(data, type, row) {
+                                return `$${parseFloat(data).toFixed(2)}`;
+                            }
                         },
                         {
-                            title: 'existencia',
+                            title: 'Existencia',
                             data: 'existencia'
                         },
                         {
@@ -992,9 +1113,16 @@
                             title: 'Acciones',
                             orderable: false,
                             searchable: false,
-                            width: '10%',
+                            width: '15%',
                             render: function(data, type, row) {
-                                return `<button type="button" onclick="eliminarProducto(this)" class="btn btn-danger">Eliminar</button>`;
+                                return `
+                                <button onclick="actualizarProducto(this)" class="btn btn-primary">
+                                    <i class="bi-pencil" style="font-size: 1rem; color: white;"></i>
+                                </button>
+                                <button onclick="eliminarProducto(this)" class="btn btn-danger">
+                                    <i class="bi-trash" style="font-size: 1rem; color: white;"></i>
+                                </button>
+                                `;
                             }
                         }
                     ],
@@ -1017,6 +1145,7 @@
                             title: 'ID',
                             data: 'id',
                             width: '5%',
+                            visible: false
                         },
                         {
                             title: 'Nombre',
