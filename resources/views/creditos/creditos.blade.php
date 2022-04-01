@@ -7,92 +7,81 @@
         <div class="header mb-2">
             <h1 class="title-modul">CRÉDITOS</h1>
             <div class="data-shop">
-                <p class="cajero me-4">Le tiende: Lizzeth Pérez</p>
-                <p class="hora">01 - Mar 10:25 am</p>
+                <p class="cajero me-4">{{ Auth::user()->name }}</p>
+                <p id="fechaHora" class="hora"></p>
             </div>
         </div>
 
         <div class="tools mb-2">
-            <button type="button" class="btn btn-secondary me-2" id="estado-cuenta">
+            <button type="button" class="btn btn-secondary me-2" id="btnEstadoCuenta">
                 Estado de cuenta
             </button>
-            <button type="button" class="btn btn-secondary me-2" id="nuevo-cliente">
-                Nuevo cliente
-            </button>
-            <button type="button" class="btn btn-secondary me-2" id="editar-credito">
-                Modificar
-            </button>
-            <button type="button" class="btn btn-secondary me-2" id="eliminar-cliente">
-                Eliminar
+            <button type="button" class="btn btn-secondary me-2" id="btnNuevoCredito">
+                Nuevo
             </button>
         </div>
         <div class="contenido-interno">
-            @include('creditos.catalogo-creditos')
-            @include('creditos.test')
-
+            @include('creditos.estado-cuenta')
+            @include('creditos.estado-cliente')
+            @include('creditos.nuevo-credito')
         </div>
-
-        <!-- Modals -->
-
-        <!-- Borrar cliente -->
-        <div class="modal fade" id="borrarProducto" tabindex="-1" aria-labelledby="borrarProductoLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="borrarProductoLabel">CONFIRMAR</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">¿Borrar producto
-                                seleccionado?</label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cancelar
-                        </button>
-                        <button type="button" class="btn btn-primary">
-                            Borrar producto
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            //--------------- Menú ------------------------
-            // $("#nuevo-credito").click(function(event) {
-            //     event.preventDefault();
-            //     $(".contenido-interno").load("./moduls/creditos/nuevo-credito.html");
-            // });
-            // $("#catalogo-clientes").click(function(event) {
-            //     event.preventDefault();
-            //     $(".contenido-interno").load(
-            //         "./moduls/clientes/catalogo-clientes.html"
-            //     );
-            // });
-
-            // $(document).ready(function(event) {
-            //     $(".contenido-interno").load(
-            //         "./moduls/creditos/catalogo-creditos.html"
-            //     );
-            // });
-
-            $("#estado-cuenta").click(function(event) {
-                $("#test").hide();
-                $("#catalogoCreditos").show();
-                // getClientes();
-            });
-
-            $("#nuevo-cliente").click(function(event) {
-                $("#catalogoCreditos").hide();
-                $("#test").show();
-                // getApartados();
-            });
-            $("#test").hide();
-            $("#catalogoCreditos").show();
-        </script>
+        
     </div>
+
+    <script>
+        $("#estado-cliente").hide();
+        $("#nuevo-credito").hide();
+        $("#estado-cuenta").show();
+        
+        $("#btnEstadoCliente").click(function(event) {
+            $("#estado-cuenta").hide();
+            $("#nuevo-credito").hide();
+            $("#estado-cliente").show();
+        });
+        $("#btnEstadoCuenta").click(function(event) {
+            $("#estado-cliente").hide();
+            $("#nuevo-credito").hide();
+            $("#estado-cuenta").show();
+        });
+        $("#btnNuevoCredito").click(function(event) {
+            $("#estado-cliente").hide();
+            $("#nuevo-credito").show();
+            $("#estado-cuenta").hide();
+        });
+        
+        setInterval(showTime, 1000);
+
+            function showTime() {
+
+                let time = new Date();
+
+                let date = time.getDate();
+                let month = time.getMonth() + 1;;
+                let year = time.getFullYear();
+
+                let hour = time.getHours();
+                let min = time.getMinutes();
+                let sec = time.getSeconds();
+                am_pm = "AM";
+
+                if (hour > 12) {
+                    hour -= 12;
+                    am_pm = "PM";
+                }
+                if (hour == 0) {
+                    hr = 12;
+                    am_pm = "AM";
+                }
+
+                hour = hour < 10 ? "0" + hour : hour;
+                min = min < 10 ? "0" + min : min;
+                sec = sec < 10 ? "0" + sec : sec;
+
+                let currentTime = `${date}/${month}/${year} ${hour}:${min}:${sec} ${am_pm}`;
+
+                document.getElementById("fechaHora")
+                    .innerHTML = currentTime;
+            }
+            showTime();
+    </script>
 @endsection

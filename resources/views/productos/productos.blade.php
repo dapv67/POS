@@ -155,33 +155,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label for="exampleFormControlInput1" class="form-label"><strong>Se vende
-                                        por:</strong></label>
-                                <div class="d-flex">
-                                    <div class="form-check me-2">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault1" checked />
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Unidad/Pieza
-                                        </label>
-                                    </div>
-                                    <div class="form-check me-2">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault2" />
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            A granel
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault3" />
-                                        <label class="form-check-label" for="flexRadioDefault3">
-                                            Como paquete
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div class="row mb-3">
                                 <div class="mb-3 col">
                                     <label for="precioCompra" class="form-label">Precio compra</label>
@@ -260,7 +234,7 @@
         </div>
 
         <div class="modal" tabindex="-1" id="modalAddPromocion">
-            <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <form id="addPromocion">
                         <div class="modal-header">
@@ -310,24 +284,18 @@
 
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <label for="cantidad1" class="form-label">Cuando la cantidad vaya
-                                        desde</label>
-                                    <input type="number" class="form-control" id="cantidad1" placeholder="" />
+                                    <label for="cantidad1" class="form-label">Fecha inicio</label>
+                                    <input type="date" class="form-control" id="cantidad1" placeholder="" />
                                 </div>
                                 <div class="mb-3 col">
-                                    <label for="cantidad2" class="form-label">Hasta</label>
-                                    <input type="number" class="form-control" id="cantidad2" placeholder="" />
+                                    <label for="cantidad2" class="form-label">Fecha fin</label>
+                                    <input type="date" class="form-control" id="cantidad2" placeholder="" />
                                 </div>
                                 <div class="mb-3 col">
-                                    <label for="cantidad3" class="form-label">Precio unitario</label>
+                                    <label for="cantidad3" class="form-label">% Descuento</label>
                                     <input type="number" class="form-control" id="cantidad3" placeholder="" />
                                 </div>
-                                <div class="mb-3 col">
-                                    <label for="" class="fw-lighter">Precio normal:
-                                        $130.00</label>
-                                    <label for="" class="fw-lighter">Precio costo:
-                                        $120.00</label>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="modal-footer">

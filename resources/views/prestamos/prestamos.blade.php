@@ -16,27 +16,39 @@
             <button type="button" class="btn btn-secondary me-2" id="btnEstadoCuenta">
                 Estado de cuenta
             </button>
+            <button type="button" class="btn btn-secondary me-2" id="btnNuevoPrestamo">
+                Nuevo
+            </button>
         </div>
         <div class="contenido-interno">
             @include('prestamos.estado-cuenta')
             @include('prestamos.estado-cliente')
+            @include('prestamos.nuevo-prestamo')
         </div>
         
     </div>
 
     <script>
         $("#estado-cliente").hide();
+        $("#nuevo-prestamo").hide();
         $("#estado-cuenta").show();
         
         $("#btnEstadoCliente").click(function(event) {
             $("#estado-cuenta").hide();
+            $("#nuevo-prestamo").hide();
             $("#estado-cliente").show();
         });
         $("#btnEstadoCuenta").click(function(event) {
             $("#estado-cliente").hide();
+            $("#nuevo-prestamo").hide();
             $("#estado-cuenta").show();
         });
-
+        $("#btnNuevoPrestamo").click(function(event) {
+            $("#estado-cliente").hide();
+            $("#nuevo-prestamo").show();
+            $("#estado-cuenta").hide();
+        });
+        
         setInterval(showTime, 1000);
 
             function showTime() {

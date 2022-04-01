@@ -1,4 +1,4 @@
-<div class="form-nuevo-producto">
+<div class="form-nuevo-producto" id="nuevo-credito">
   <h2 class="subtitle-modul mb-2">NUEVO CRÉDTIO</h2>
   <form>
     <div class="row">

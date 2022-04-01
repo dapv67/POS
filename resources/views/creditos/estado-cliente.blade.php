@@ -1,7 +1,7 @@
 <div class="estado-cliente" id="estado-cliente">
-  <h1 class="mb-3">Estado de cuenta del cliente</h1>
+  <h1>Estado de cuenta del cliente</h1>
   <div class="encabezado-estado-cliente">
-    <h2>Folio #001</h2>
+
     <h2>Julia Torres</h2>
     <div>
   
@@ -14,36 +14,40 @@
       <h3>28/03/2022</h3>
     </div>
   </div>
-  <div class="row">
-        <select id="filtroCategoria" class="form-select col-sm me-2" style="width: 3rem" aria-label="Default select example">
-            <option value="" selected>Marzo</option>
-            <option value="1">Abril</option>
-        </select> 
-        <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#liquidar">
-            Abonar
-        </button>
-        <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#liquidar">
-            Liquidar adeudo
-        </button>
+  <div class="mb-3 mt-3">
+      <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#liquidar">
+          Abonar
+      </button>
+      <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#liquidar">
+          Liquidar adeudo
+      </button>
+      <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#liquidar">
+          Detalle de abonos
+      </button>
   </div>
   
-    <h5>Detalle de abonos</h5>
+    
     <table id="" class="display table table-striped" style="width:100%">
         <thead>
             <tr>
             <th scope="col">#</th>
             <th scope="col">Fecha</th>
-            <th scope="col">Monto</th>
-            <th scope="col">Cajera que recibió</th>
+            <th scope="col">Descripcion del producto</th>
+            <th scope="col">Precio de venta</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Importe</th>
+
+      
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th scope="row">1</th>
                 <td>15/03/22</td>
+                <td>PAntalon azul</td>
                 <td>$450.00</td>
-                <td>Liz Perez</td>
-             
+                <td>2</td>
+                <td>$900.00</td>
             
             
         </tbody>

@@ -166,6 +166,12 @@ main {
     display: flex;
     width: 100%;
 }
-.tabla-prestamos .mes {
-    width: 15%;
+.encabezado-tabla-interna {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
 }
+/* .tabla-prestamos .mes {
+    width: 15%;
+} */
