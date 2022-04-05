@@ -26,6 +26,9 @@
             <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#buscarProducto">
                 F10 Buscar
             </button>
+            <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" href="#apartado" role="button">
+                F11 Sistema de apartado
+            </button>
         </div>
 
         <div class="contenido-interno mb-2">
@@ -38,40 +41,22 @@
             </div>
 
             <table id="myTable" class="display table table-striped" style="width:100%">
-                {{-- <thead class="header-table">
-                    <tr>
-                        <th scope="col">Código de barras</th>
-                        <th scope="col">Descripción del producto</th>
-                        <th scope="col">Precio venta</th>
-                        <th scope="col">Cant.</th>
-                        <th scope="col">Importe</th>
-                        <th scope="col">Existencia</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1234567890</td>
-                        <td>Pantalón rojo 32 X 31</td>
-                        <td>$1800.00</td>
-                        <td>3</td>
-                        <td>$2121.00</td>
-                        <td>9</td>
-                    </tr>
-                    <tr>
-                        <td>0987654321</td>
-                        <td>Pantalón Lives azul 32 X 31</td>
-                        <td>$599.00</td>
-                        <td>2</td>
-                        <td>$1198.00</td>
-                        <td>5</td>
-                    </tr>
-                </tbody> --}}
+                
             </table>
         </div>
 
         <div class="reports">
             <div class="general">
                 <p class="quantity"><b id="cantidadProductos">0</b> productos en la venta actual.</p>
+            </div>
+             <div class="reports_cliente">
+                <label for="exampleFormControlInput1" class="form-label me-2">Cliente</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Público en general</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
             </div>
             <div class="totals d-flex">
                 <button class="btn btn-primary me-2" type="submit" data-bs-toggle="modal" data-bs-target="#cobrar">
@@ -80,7 +65,426 @@
                 <input id="total" name="total" class="form-control form-control-lg" type="text" placeholder="$0.00" value="$0.00" disabled />
             </div>
         </div>
-        <!-- Modals -->
+        <!--------------------------------------- Modals ------------------------------------------>
+        <!-- Sistema de apartado -->
+        <div class="modal fade" id="apartado"  aria-labelledby="entradasLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="entradasLabel">Sistema de apartado</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body botones-apartado">
+                      
+                        <button data-bs-target="#apartar-venta" data-bs-toggle="modal" class="btn btn-success btn-apartado-opcion">Apartar venta</button>
+                        <button data-bs-target="#apartados" data-bs-toggle="modal" class="btn btn-primary btn-apartado-opcion">Apartados</button>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Apartar venta -->
+        <div class="modal fade" id="apartar-venta"  aria-labelledby="apartarVentaLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="entradasLabel">APARTAR VENTA EN CURSO</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="item-abonar-apartado mb-3">
+                            <h4 class="me-2">Folio de venta:</h4>
+                            <p class="number-apartado">1231</p>
+                        </div>
+                        <div class="item-abonar-apartado mb-3">
+                            <h4 class="me-2">Total:</h4>
+                            <p class="number-apartado">$1231</p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Fecha de apartado</label>
+                            <input type="date" class="form-control" id="cantidad"  />
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Fecha límite de pago</label>
+                            <input type="date" class="form-control" id="cantidad"  />
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Cliente</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Monto para apartar (mín 30%)</label>
+                            <input type="number" class="form-control" id="cantidad" placeholder="$0.00" />
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="button" class="btn btn-primary">Apartar venta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Apartartados -->
+        <div class="modal fade" id="apartados"  aria-labelledby="apartartadosLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="entradasLabel">TABLA DE APARTADOS</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="tools-interno mb-2">
+                            <div class="d-flex">
+                                <div class="me-2">
+                                    <input type="search" class="form-control" id="filtroCodigo" placeholder="Buscar por cliente"
+                                        aria-label="Search">
+                                </div>
+                            </div>
+
+                            <div class="filters">
+
+                                <button type="button" class="btn btn-success me-2" data-bs-toggle="modal"
+                                    data-bs-target="#abonar-apartado">
+                                    Abonar
+                                </button>
+                                <button type="button" class="btn btn-success me-2" data-bs-toggle="modal"
+                                    data-bs-target="#saldar-apartado">
+                                    Saldar deuda completa
+                                </button>
+                                <button type="button" class="btn btn-success me-2" data-bs-toggle="modal"
+                                    data-bs-target="#detalle-abonos-apartado">
+                                    Detalle de abonos
+                                </button>
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#detalle-mercancia-apartado">
+                                    Detalle  de mercancia
+                                </button>
+                            </div>
+
+                            
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">Folio de apartado</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Cliente</th>
+                                <th scope="col">Articulos</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Abonado</th>
+                                <th scope="col">Debe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>10/04/2022</td>
+                                    <td>Josefina Vázquez</td>
+                                    <td>7</td>
+                                    <td>$450</td>
+                                    <td>$100</td>
+                                    <td>$350</td>
+                                
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>10/04/2022</td>
+                                    <td>Lizzeth Vázquez</td>
+                                    <td>7</td>
+                                    <td>$450</td>
+                                    <td>$100</td>
+                                    <td>$350</td>
+                                
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cerrar
+                        </button>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- Abonar apartado --}}
+        <div class="modal fade" id="abonar-apartado"  aria-labelledby="abonarApartadoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="entradasLabel">ABONAR</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Folio de apartado:</h4>
+                                <p class="number-apartado">1231</p>
+                            </div>
+                         
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Cliente:</h4>
+                                <p class="number-apartado">Josefina Vazquez</p>
+                            </div>
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Articulos:</h4>
+                                <p class="number-apartado">5</p>
+                            </div>
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Fecha de apartado:</h4>
+                                <p class="number-apartado">10/04/2022</p>
+                            </div>
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Fecha límite de pago:</h4>
+                                <p class="number-apartado">12/04/2022</p>
+                            </div>
+                            <div class="cantidades-abonar-apartado">
+
+                                <div class="item-abonar-apartado ">
+                                    <h4 class="me-2">Total:</h4>
+                                    <p class="number-apartado">$500</p>
+                                </div>
+                                <div class="item-abonar-apartado ">
+                                    <h4 class="me-2">Abonado:</h4>
+                                    <p class="number-apartado">$300</p>
+                                </div>
+                                <div class="item-abonar-apartado ">
+                                    <h4 class="me-2">Debe:</h4>
+                                    <p class="number-apartado">$200</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="cantidad" placeholder="$0.00" />
+                        </div>
+                      
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Monto para abonar</label>
+                            <input type="number" class="form-control" id="cantidad" placeholder="$0.00" />
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="button" class="btn btn-success">Abonar e imprimir</button>
+                        <button type="button" class="btn btn-primary">Abonar sin imprimir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Saldar apartado -->
+        <div class="modal fade" id="saldar-apartado" aria-labelledby="saldarApartadoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="entradasLabel">SALDAR APARTADO</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Esta seguro de saldar apartado con <strong>folio 1234?</strong> </label>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="button" class="btn btn-primary">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- Detalle abonos apartado --}}
+        <div class="modal fade" id="detalle-abonos-apartado"  aria-labelledby="abonarApartadoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="entradasLabel">DETALLE DE ABONOS</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Folio de apartado:</h4>
+                                <p class="number-apartado">4321</p>
+                            </div>
+                          
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Cliente:</h4>
+                                <p class="number-apartado">Josefina Vazquez</p>
+                            </div>
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Articulos:</h4>
+                                <p class="number-apartado">5</p>
+                            </div>
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Fecha de apartado:</h4>
+                                <p class="number-apartado">10/04/2022</p>
+                            </div>
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Fecha límite de pago:</h4>
+                                <p class="number-apartado">12/04/2022</p>
+                            </div>
+                            <div class="cantidades-abonar-apartado">
+
+                                <div class="item-abonar-apartado ">
+                                    <h4 class="me-2">Total:</h4>
+                                    <p class="number-apartado">$500</p>
+                                </div>
+                                <div class="item-abonar-apartado ">
+                                    <h4 class="me-2">Abonado:</h4>
+                                    <p class="number-apartado">$300</p>
+                                </div>
+                                <div class="item-abonar-apartado ">
+                                    <h4 class="me-2">Debe:</h4>
+                                    <p class="number-apartado">$200</p>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Monto abonado</th>
+                               
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>10/04/2022</td>
+                                    <td>$250</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>10/04/2022</td>
+                                    <td>$250</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- Detalle de mercancia apartada --}}
+        <div class="modal fade" id="detalle-mercancia-apartado"  aria-labelledby="abonarApartadoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="entradasLabel">DETALLE DE MERCANCIA APARTADA</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Folio de apartado:</h4>
+                                <p class="number-apartado">1231</p>
+                            </div>
+                            
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Cliente:</h4>
+                                <p class="number-apartado">Josefina Vazquez</p>
+                            </div>
+                            
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Articulos:</h4>
+                                <p class="number-apartado">5</p>
+                            </div>
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Fecha de apartado:</h4>
+                                <p class="number-apartado">10/04/2022</p>
+                            </div>
+                            <div class="item-abonar-apartado mb-3">
+                                <h4 class="me-2">Fecha límite de pago:</h4>
+                                <p class="number-apartado">12/04/2022</p>
+                            </div>
+                            <div class="cantidades-abonar-apartado">
+                                
+                                <div class="item-abonar-apartado ">
+                                    <h4 class="me-2">Total:</h4>
+                                    <p class="number-apartado">$500</p>
+                                </div>
+                                <div class="item-abonar-apartado ">
+                                    <h4 class="me-2">Abonado:</h4>
+                                    <p class="number-apartado">$300</p>
+                                </div>
+                                <div class="item-abonar-apartado ">
+                                    <h4 class="me-2">Debe:</h4>
+                                    <p class="number-apartado">$200</p>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Importe</th>
+                               
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>X</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                    <td>$750</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>X</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                    <td>$750</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Entrada de dinero -->
         <div class="modal fade" id="entradas" tabindex="-1" aria-labelledby="entradasLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
