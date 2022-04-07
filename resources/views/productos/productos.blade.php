@@ -150,12 +150,12 @@
                                         aria-label="Default select example">
                                         <option value="" selected>Seleccionar...</option>
                                         @foreach ($categorias as $categoria)
-                                            <option value="{{ $categoria->name }}">{{ $categoria->name }}</option>
+                                            <option value="{{ $categoria->id }}">{{ $categoria->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="row mb-3">
                                 <div class="mb-3 col">
                                     <label for="precioCompra" class="form-label">Precio compra</label>
@@ -295,7 +295,7 @@
                                     <label for="cantidad3" class="form-label">% Descuento</label>
                                     <input type="number" class="form-control" id="cantidad3" placeholder="" />
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -317,8 +317,7 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input type="text" class="form-control" id="idActualizar"
-                                        name="idActualizar" hidden/>
+                            <input type="text" class="form-control" id="idActualizar" name="idActualizar" hidden />
                             <div class="row mb-3">
                                 <div class="mb-3 col">
                                     <label for="precioCompraActualizar" class="form-label">Precio compra</label>
@@ -380,28 +379,27 @@
                 backdrop: 'static'
             });
 
-
             let tableProductos, tableCategorias, tablePromociones, row;
 
             $("#btnCatalogo").click(function(event) {
                 $("#promociones").hide();
                 $("#categorias").hide();
                 $("#catalogo").show();
-                getProductos();
+                cargarTablaProductos();
             });
 
             $("#btnCategorias").click(function(event) {
                 $("#catalogo").hide();
                 $("#promociones").hide();
                 $("#categorias").show();
-                getCategorias();
+                cargarTablaCategorias();
             });
 
             $("#btnPromociones").click(function(event) {
                 $("#catalogo").hide();
                 $("#categorias").hide();
                 $("#promociones").show();
-                // getPromociones();
+                // cargarTablaPromociones();
             });
 
             $("#addProducto").submit(function(event) {
@@ -637,138 +635,6 @@
                 });
 
             });
-
-            function getProductos() {
-
-                $.ajax({
-
-                    url: 'getProductos',
-                    type: 'GET',
-                    dataType: 'json',
-
-                    beforeSend: function() {
-
-                        Swal.fire({
-                            title: 'Descargando...',
-                            html: 'Espere un momento',
-                            didOpen: () => {
-                                Swal.showLoading()
-                            }
-                        });
-
-                    },
-
-                    success: function(json) {
-
-                        Swal.close();
-
-                        cargarTablaProductos(json);
-                    },
-
-                    error: function(err) {
-
-                        console.error(err.responseJSON.message);
-
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Ocurrio un error al momento de descargar de base de datos',
-                            icon: 'error',
-                            confirmButtonText: 'Ok',
-                            confirmButtonColor: '#000',
-                        });
-
-                    },
-                });
-
-            }
-
-            function getCategorias() {
-
-                $.ajax({
-
-                    url: 'getCategorias',
-                    type: 'GET',
-                    dataType: 'json',
-
-                    beforeSend: function() {
-
-                        Swal.fire({
-                            title: 'Descargando...',
-                            html: 'Espere un momento',
-                            didOpen: () => {
-                                Swal.showLoading()
-                            }
-                        });
-
-                    },
-
-                    success: function(json) {
-
-                        Swal.close();
-
-                        cargarTablaCategorias(json);
-                    },
-
-                    error: function(err) {
-
-                        console.error(err.responseJSON.message);
-
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Ocurrio un error al momento de descargar de base de datos',
-                            icon: 'error',
-                            confirmButtonText: 'Ok',
-                            confirmButtonColor: '#000',
-                        });
-
-                    },
-                });
-
-            }
-
-            function getPromociones() {
-
-                $.ajax({
-
-                    url: 'getPromociones',
-                    type: 'GET',
-                    dataType: 'json',
-
-                    beforeSend: function() {
-
-                        Swal.fire({
-                            title: 'Descargando...',
-                            html: 'Espere un momento',
-                            didOpen: () => {
-                                Swal.showLoading()
-                            }
-                        });
-
-                    },
-
-                    success: function(json) {
-
-                        Swal.close();
-
-                        cargarTablaPromociones(json);
-                    },
-
-                    error: function(err) {
-
-                        console.error(err.responseJSON.message);
-
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Ocurrio un error al momento de descargar de base de datos',
-                            icon: 'error',
-                            confirmButtonText: 'Ok',
-                            confirmButtonColor: '#000',
-                        });
-
-                    },
-                });
-
-            }
 
             function actualizarProducto(e) {
                 row = tableProductos.row($(e).parents('tr'));
@@ -1022,17 +888,49 @@
 
                 tableProductos = $("#tableProductos").DataTable({
                     dom: 'lrt',
-                    data: data,
-                    columns: [{
-                            title: 'ID',
-                            data: 'id',
-                            width: '5%',
-                            visible: false
+                    ajax: {
+                        url: 'getProductos',
+                        type: 'GET',
+                        dataType: 'json',
+
+                        beforeSend: function() {
+
+                            Swal.fire({
+                                title: 'Descargando...',
+                                html: 'Espere un momento',
+                                didOpen: () => {
+                                    Swal.showLoading()
+                                }
+                            });
+
                         },
-                        {
-                            title: 'id_categoria',
-                            data: 'id_categoria',
-                            visible: false
+
+                        complete: function(json) {
+
+                            Swal.close();
+
+                        },
+
+                        error: function(err) {
+
+                            console.error(err.responseJSON.message);
+
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Ocurrio un error al momento de descargar de base de datos',
+                                icon: 'error',
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#000',
+                            });
+
+                        },
+                    },
+                    columns: [{
+                            searchable: false,
+                            orderable: false,
+                            title: '#',
+                            width: '5%',
+                            data: () => 0
                         },
                         {
                             title: 'Código',
@@ -1094,11 +992,20 @@
                             }
                         }
                     ],
+                    order: [1, 'asc'],
                     scrollY: '50vh',
                     scrollCollapse: true,
                     paging: false,
                 });
 
+                tableProductos.on('order.dt search.dt', function() {
+                    tableProductos.column(0, {
+                        search: 'applied',
+                        order: 'applied'
+                    }).nodes().each(function(cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
             }
 
             function cargarTablaCategorias(data) {
@@ -1106,14 +1013,53 @@
                 if (tableCategorias !== undefined) {
                     tableCategorias.destroy();
                 }
+
                 $.fn.dataTable.ext.search.pop();
+
                 tableCategorias = $("#tableCategorias").DataTable({
-                    data: data,
+                    ajax: {
+                        url: 'getCategorias',
+                        type: 'GET',
+                        dataType: 'json',
+
+                        beforeSend: function() {
+
+                            Swal.fire({
+                                title: 'Descargando...',
+                                html: 'Espere un momento',
+                                didOpen: () => {
+                                    Swal.showLoading()
+                                }
+                            });
+
+                        },
+
+                        complete: function(json) {
+
+                            Swal.close();
+
+                        },
+
+                        error: function(err) {
+
+                            console.error(err.responseJSON.message);
+
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Ocurrio un error al momento de descargar de base de datos',
+                                icon: 'error',
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#000',
+                            });
+
+                        },
+                    },
                     columns: [{
-                            title: 'ID',
-                            data: 'id',
+                            searchable: false,
+                            orderable: false,
+                            title: '#',
                             width: '5%',
-                            visible: false
+                            data: () => 0
                         },
                         {
                             title: 'Nombre',
@@ -1129,12 +1075,20 @@
                             }
                         }
                     ],
+                    order: [1, 'asc'],
                     scrollY: '50vh',
                     scrollCollapse: true,
                     paging: false
                 });
 
-
+                tableCategorias.on('order.dt search.dt', function() {
+                    tableCategorias.column(0, {
+                        search: 'applied',
+                        order: 'applied'
+                    }).nodes().each(function(cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
             }
 
             function cargarTablaPromociones(data) {
@@ -1144,10 +1098,49 @@
                 }
 
                 tablePromociones = $("#tablePromociones").DataTable({
-                    data: data,
+                    ajax: {
+                        url: 'getPromociones',
+                        type: 'GET',
+                        dataType: 'json',
+
+                        beforeSend: function() {
+
+                            Swal.fire({
+                                title: 'Descargando...',
+                                html: 'Espere un momento',
+                                didOpen: () => {
+                                    Swal.showLoading()
+                                }
+                            });
+
+                        },
+
+                        complete: function(json) {
+
+                            Swal.close();
+
+                        },
+
+                        error: function(err) {
+
+                            console.error(err.responseJSON.message);
+
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Ocurrio un error al momento de descargar de base de datos',
+                                icon: 'error',
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#000',
+                            });
+
+                        },
+                    },
                     columns: [{
-                            title: 'ID',
-                            data: 'id'
+                            searchable: false,
+                            orderable: false,
+                            title: '#',
+                            width: '5%',
+                            data: () => 0
                         },
                         {
                             title: 'Nombre',
@@ -1160,15 +1153,23 @@
                             }
                         }
                     ],
+                    order: [1, 'asc'],
                     scrollY: '50vh',
                     scrollCollapse: true,
                     paging: false
                 });
 
-
+                tablePromociones.on('order.dt search.dt', function() {
+                    tablePromociones.column(0, {
+                        search: 'applied',
+                        order: 'applied'
+                    }).nodes().each(function(cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
             }
 
-            getProductos();
+            cargarTablaProductos();
             $("#promociones").hide();
             $("#categorias").hide();
             $("#catalogo").show();

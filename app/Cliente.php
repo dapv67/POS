@@ -10,16 +10,20 @@ class Cliente extends Model
 
     protected $fillable = [
         'nombre',
-        'apellidos',
-        'celular',
         'telefono',
+        'celular',
         'correo',
-        'domicilio1',
-        'domicilio2',
+        'domicilio',
         'estado',
         'municipio',
-        'colonia',
-        'cp',
+        'lugar_trabajo',
+        'img',
+        'nombre_tercero',
+        'estado_tercero',
+        'municipio_tercero',
+        'domicilio_tercero',
+        'telefono_tercero',
+        'celular_tercero',
         'comentarios',
     ];
 }

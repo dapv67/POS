@@ -22,8 +22,14 @@ class CreateClientesTable extends Migration
             $table->string('domicilio');
             $table->string('estado');
             $table->string('municipio');
-            $table->string('colonia');
-            $table->string('cp');
+            $table->string('lugar_trabajo');
+            $table->string('img');
+            $table->string('nombre_tercero');
+            $table->string('estado_tercero');
+            $table->string('municipio_tercero');
+            $table->string('domicilio_tercero');
+            $table->string('telefono_tercero');
+            $table->string('celular_tercero');
             $table->string('comentarios');
             $table->timestamps();
         });

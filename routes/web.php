@@ -10,6 +10,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/ventas', 'VentasController@index')->name('ventas');
 Route::get('/addProductoVenta', 'VentasController@addProducto')->name('ventas.addProducto');
+Route::get('/verificador', 'VentasController@verificador')->name('ventas.verificador');
+Route::post('/apartarVenta', 'VentasController@apartarVenta')->name('ventas.apartar');
+Route::post('/addEntrada', 'VentasController@addEntrada')->name('entradas.add');
+Route::post('/addSalida', 'VentasController@addSalida')->name('salidas.add');
 
 Route::get('/productos', 'ProductosController@index')->name('productos');
 Route::get('/getProductos', 'ProductosController@getProductos')->name('productos.get');
@@ -31,7 +35,9 @@ Route::get('/categorias', 'ProductosController@categorias')->name('categorias');
 Route::get('/clientes', 'ClientesController@index')->name('clientes');
 Route::get('/getClientes', 'ClientesController@getClientes')->name('clientes.get');
 Route::post('/addCliente', 'ClientesController@addCliente')->name('clientes.add');
+Route::post('/updateCliente', 'ClientesController@updateCliente')->name('clientes.update');
 Route::post('/deleteCliente', 'ClientesController@deleteCliente')->name('clientes.delete');
+Route::get('/download', 'ClientesController@download')->name('clientes.download');
 
 Route::get('/cajeras', 'CajerasController@index')->name('cajeras');
 Route::get('/getCajeras', 'CajerasController@getCajeras')->name('cajeras.get');
