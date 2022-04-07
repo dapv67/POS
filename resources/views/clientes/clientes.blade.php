@@ -16,9 +16,7 @@
             <button type="button" class="btn btn-secondary me-2" id="btnCatalogo">
                 Clientes
             </button>
-            <button type="button" class="btn btn-secondary me-2" id="btnApartado">
-                Apartado
-            </button>
+           
         </div>
         <div class="contenido-interno">
 
