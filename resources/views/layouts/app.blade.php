@@ -22,6 +22,8 @@
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
+
     <!-- Fonts -->
     <link rel="shortcut icon" href="{{ asset('img/ic_nav.svg') }}" type="image/x-icon">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -35,6 +37,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
+
 </head>
 
 <body>

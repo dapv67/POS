@@ -198,3 +198,7 @@ main {
 /* .tabla-prestamos .mes {
     width: 15%;
 } */
+
+.selected {
+    background-color: #0d6efd;
+}

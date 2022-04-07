@@ -16,7 +16,7 @@
             <button type="button" class="btn btn-secondary me-2" id="btnCatalogo">
                 Clientes
             </button>
-           
+
         </div>
         <div class="contenido-interno">
 
@@ -55,12 +55,12 @@
 
         @include('clientes.nuevo-cliente')
 
-        <div class="modal" tabindex="-1" id="modalActualizarCliente">
+        <div class="modal" tabindex="-1" id="modalUpdateCliente">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
-                    <form id="actualizarCliente">
+                    <form id="updateCliente">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalActualizarClienteLabel">ACTUALIZAR CLIENTE</h5>
+                            <h5 class="modal-title" id="modalUpdateClienteLabel">ACTUALIZAR CLIENTE</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
@@ -208,22 +208,22 @@
                                 <div class="mb-3 col">
                                     <label for="nombreDetalles" class="form-label">Nombre completo</label>
                                     <input type="text" class="form-control" id="nombreDetalles" name="nombreDetalles"
-                                        placeholder="" />
+                                        placeholder="" disabled />
                                 </div>
                                 <div class="mb-3 col-3">
                                     <label for="correoDetalles" class="form-label">Correo</label>
                                     <input type="email" class="form-control" id="correoDetalles" name="correoDetalles"
-                                        placeholder="" />
+                                        placeholder="" disabled />
                                 </div>
                                 <div class="mb-3 col-3">
                                     <label for="telefonoDetalles" class="form-label">Teléfono</label>
                                     <input type="tel" class="form-control" id="telefonoDetalles" name="telefonoDetalles"
-                                        placeholder="" />
+                                        placeholder="" disabled />
                                 </div>
                                 <div class="mb-3 col-3">
                                     <label for="celularDetalles" class="form-label">Celular</label>
                                     <input type="tel" class="form-control" id="celularDetalles" name="celularDetalles"
-                                        placeholder="" />
+                                        placeholder="" disabled />
                                 </div>
 
 
@@ -231,31 +231,23 @@
                             <div class="row">
                                 <div class="mb-3 col">
                                     <label for="estadoDetalles" class="form-label">Estado</label>
-                                    <select id="estadoDetalles" name="estadoDetalles" class="form-select"
-                                        aria-label="Default select example">
-                                        <option selected>Seleccione uno</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="estadoDetalles" name="estadoDetalles"
+                                        placeholder="" disabled />
                                 </div>
                                 <div class="mb-3 col">
                                     <label for="municipioDetalles" class="form-label">Municipio</label>
-                                    <select id="municipioDetalles" name="municipioDetalles" class="form-select"
-                                        aria-label="Default select example">
-                                        <option selected>Seleccione uno</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="municipioDetalles"
+                                        name="municipioDetalles" placeholder="" disabled />
                                 </div>
                                 <div class="mb-3 col">
                                     <label for="domicilioDetalles" class="form-label">Domicilio</label>
                                     <input type="text" class="form-control" id="domicilioDetalles"
-                                        name="domicilioDetalles" placeholder="" />
+                                        name="domicilioDetalles" placeholder="" disabled />
                                 </div>
                                 <div class="mb-3 col">
                                     <label for="lugar_trabajoDetalles" class="form-label">Lugar de trabajo</label>
                                     <input type="text" class="form-control" id="lugar_trabajoDetalles"
-                                        name="lugar_trabajoDetalles" placeholder="" />
+                                        name="lugar_trabajoDetalles" placeholder="" disabled />
                                 </div>
 
                             </div>
@@ -263,7 +255,8 @@
                                 <div class="col-6 ">
                                     <label class="form-label">Foto de identificación oficial</label>
                                     <div class="input-group mb-3">
-                                        <img id="imgDetalles">
+                                        <a id="download" href="/download" target="_blank" class="btn btn-success"><i
+                                                class="bi bi-cloud-download"> </i> Descargar</a>
                                     </div>
                                 </div>
                             </div>
@@ -274,30 +267,22 @@
                                 <div class="mb-3 col">
                                     <label for="nombre_terceroDetalles" class="form-label">Nombre</label>
                                     <input type="text" class="form-control" id="nombre_terceroDetalles"
-                                        name="nombre_terceroDetalles" placeholder="" />
+                                        name="nombre_terceroDetalles" placeholder="" disabled />
                                 </div>
                                 <div class="mb-3 col">
                                     <label for="estado_terceroDetalles" class="form-label">Estado</label>
-                                    <select id="estado_terceroDetalles" name="estado_terceroDetalles"
-                                        class="form-select" aria-label="Default select example">
-                                        <option selected>Seleccione uno</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="estado_terceroDetalles"
+                                        name="estado_terceroDetalles" placeholder="" disabled />
                                 </div>
                                 <div class="mb-3 col">
                                     <label for="municipio_terceroDetalles" class="form-label">Municipio</label>
-                                    <select id="municipio_terceroDetalles" name="municipio_terceroDetalles"
-                                        class="form-select" aria-label="Default select example">
-                                        <option selected>Seleccione uno</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="municipio_terceroDetalles"
+                                        name="municipio_terceroDetalles" placeholder="" disabled />
                                 </div>
                                 <div class="mb-3 col">
                                     <label for="domicilio_terceroDetalles" class="form-label">Domicilio</label>
                                     <input type="text" class="form-control" id="domicilio_terceroDetalles"
-                                        name="domicilio_terceroDetalles" placeholder="" />
+                                        name="domicilio_terceroDetalles" placeholder="" disabled />
                                 </div>
 
                             </div>
@@ -305,25 +290,23 @@
                                 <div class="mb-3 col-3">
                                     <label for="telefono_terceroDetalles" class="form-label">Teléfono</label>
                                     <input type="tel" class="form-control" id="telefono_terceroDetalles"
-                                        name="telefono_terceroDetalles" placeholder="" />
+                                        name="telefono_terceroDetalles" placeholder="" disabled />
                                 </div>
                                 <div class="mb-3 col-3">
                                     <label for="celular_terceroDetalles" class="form-label">Celular</label>
                                     <input type="tel" class="form-control" id="celular_terceroDetalles"
-                                        name="celular_terceroDetalles" placeholder="" />
+                                        name="celular_terceroDetalles" placeholder="" disabled />
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <strong>
-
                                     <label for="comentariosDetalles" class="form-label">Notas/Comentarios</label>
                                 </strong>
-                                <textarea class="form-control" id="comentariosDetalles" name="comentariosDetalles" rows="3"></textarea>
+                                <textarea class="form-control" id="comentariosDetalles" name="comentariosDetalles" rows="3" disabled></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         </div>
                     </form>
                 </div>
@@ -334,14 +317,14 @@
             const modalAdd = new bootstrap.Modal(document.getElementById('modalAddCliente'), {
                 backdrop: 'static'
             });
-            const modalActualizarCliente = new bootstrap.Modal(document.getElementById('modalActualizarCliente'), {
+            const modalUpdateCliente = new bootstrap.Modal(document.getElementById('modalUpdateCliente'), {
                 backdrop: 'static'
             });
             const modalDetallesCliente = new bootstrap.Modal(document.getElementById('modalDetallesCliente'), {
                 backdrop: 'static'
             });
 
-            let tableClientes, tableApartados;
+            let tableClientes, tableApartados, row;
 
             $("#btnCatalogo").click(function(event) {
                 $("#apartados").hide();
@@ -418,18 +401,27 @@
 
             });
 
-            function getClientes() {
+            $("#updateCliente").submit(function(event) {
+
+                event.preventDefault();
+
+                // const data = $(this).serialize();
+                var data = new FormData(this);
 
                 $.ajax({
 
-                    url: 'getClientes',
-                    type: 'GET',
+                    url: 'updateCliente',
+                    data: data,
+                    type: 'POST',
                     dataType: 'json',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
 
                     beforeSend: function() {
 
                         Swal.fire({
-                            title: 'Descargando...',
+                            title: 'Creando...',
                             html: 'Espere un momento',
                             didOpen: () => {
                                 Swal.showLoading()
@@ -440,9 +432,19 @@
 
                     success: function(json) {
 
-                        Swal.close();
+                        Swal.fire({
+                            title: 'OK!',
+                            text: 'Cliente actualizado',
+                            icon: 'success',
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
+                        });
 
-                        cargarTablaClientes(json);
+                        row.data(json);
+
+                        $('#updateCliente')[0].reset();
+
+                        modalUpdateCliente.hide();
                     },
 
                     error: function(err) {
@@ -451,7 +453,7 @@
 
                         Swal.fire({
                             title: 'Error!',
-                            text: 'Ocurrio un error al momento de descargar de base de datos',
+                            text: 'Ocurrio un error al momento de crear en base de datos',
                             icon: 'error',
                             confirmButtonText: 'Ok',
                             confirmButtonColor: '#000',
@@ -460,7 +462,7 @@
                     },
                 });
 
-            }
+            });
 
             function getApartados() {
 
@@ -527,6 +529,13 @@
                 $('#celular_terceroDetalles').val(data.celular_tercero);
                 $('#comentariosDetalles').val(data.comentarios);
 
+                if (data.img) {
+                    $('#download').show();
+                    $('#download').attr('href', `/download?img=${data.img}`);
+                } else {
+                    $('#download').hide();
+                }
+
 
                 console.log(data);
 
@@ -534,15 +543,9 @@
 
             }
 
-            function actualizarCliente(e) {
+            function updateCliente(e) {
                 row = tableClientes.row($(e).parents('tr'));
                 const data = row.data();
-
-                // $('#idActualizar').val(data.id);
-                // $('#maximoActualizar').val(data.maximo);
-                // $('#minimoActualizar').val(data.minimo);
-                // $('#precioCompraActualizar').val(data.precio_compra);
-                // $('#precioVentaActualizar').val(data.precio_venta);
 
                 $('#idActualizar').val(data.id);
                 $('#nombreActualizar').val(data.nombre);
@@ -563,7 +566,7 @@
 
                 console.log(data);
 
-                modalActualizarCliente.show();
+                modalUpdateCliente.show();
 
             }
 
@@ -599,11 +602,49 @@
 
                 tableClientes = $("#tableClientes").DataTable({
                     dom: 'lrt',
-                    data: data,
+                    ajax: {
+                        url: 'getClientes',
+                        type: 'GET',
+                        dataType: 'json',
+
+                        beforeSend: function() {
+
+                            Swal.fire({
+                                title: 'Descargando...',
+                                html: 'Espere un momento',
+                                didOpen: () => {
+                                    Swal.showLoading()
+                                }
+                            });
+
+                        },
+
+                        complete: function(json) {
+
+                            Swal.close();
+
+                        },
+
+                        error: function(err) {
+
+                            console.error(err.responseJSON.message);
+
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Ocurrio un error al momento de descargar de base de datos',
+                                icon: 'error',
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#000',
+                            });
+
+                        },
+                    },
                     columns: [{
-                            title: 'ID',
-                            data: 'id',
+                            searchable: false,
+                            orderable: false,
+                            title: '#',
                             width: '5%',
+                            data: () => 0
                         },
                         {
                             title: 'nombre',
@@ -691,7 +732,7 @@
                                 <button onclick="detallesCliente(this)" class="btn btn-success">
                                     <i class="bi-eye" style="font-size: 1rem; color: white;"></i>
                                 </button>
-                                <button onclick="actualizarCliente(this)" class="btn btn-primary">
+                                <button onclick="updateCliente(this)" class="btn btn-primary">
                                     <i class="bi-pencil" style="font-size: 1rem; color: white;"></i>
                                 </button>
                                 <button onclick="eliminarCliente(this)" class="btn btn-danger">
@@ -701,10 +742,20 @@
                             }
                         }
                     ],
+                    order: [1, 'asc'],
                     scrollY: '50vh',
                     scrollCollapse: true,
                     paging: false,
                 });
+
+                tableClientes.on('order.dt search.dt', function() {
+                    tableClientes.column(0, {
+                        search: 'applied',
+                        order: 'applied'
+                    }).nodes().each(function(cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
 
             }
 
@@ -744,7 +795,7 @@
             }
 
             function eliminarCliente(e) {
-                const row = tableClientes.row($(e).parents('tr'));
+                row = tableClientes.row($(e).parents('tr'));
                 const data = row.data();
 
                 Swal.fire({
@@ -815,7 +866,7 @@
                 tableClientes.draw();
             });
 
-            getClientes();
+            cargarTablaClientes();
             $("#apartados").hide();
             $("#catalogo").show();
 

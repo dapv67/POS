@@ -26,7 +26,9 @@
     </div>
 
     <script>
-        const modalAdd = new bootstrap.Modal(document.getElementById('modalAddCajera'),{backdrop: 'static'});
+        const modalAdd = new bootstrap.Modal(document.getElementById('modalAddCajera'), {
+            backdrop: 'static'
+        });
         let tableCajeras;
 
         $("#addCajera").submit(function(event) {
@@ -89,51 +91,6 @@
 
         });
 
-        function getCajeras() {
-
-            $.ajax({
-
-                url: 'getCajeras',
-                type: 'GET',
-                dataType: 'json',
-
-                beforeSend: function() {
-
-                    Swal.fire({
-                        title: 'Descargando...',
-                        html: 'Espere un momento',
-                        didOpen: () => {
-                            Swal.showLoading()
-                        }
-                    });
-
-                },
-
-                success: function(json) {
-
-                    Swal.close();
-                    console.log(json);
-
-                    cargarTablaCajeras(json);
-                },
-
-                error: function(err) {
-
-                    console.error(err.responseJSON.message);
-
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'Ocurrio un error al momento de descargar de base de datos',
-                        icon: 'error',
-                        confirmButtonText: 'Ok',
-                        confirmButtonColor: '#000',
-                    });
-
-                },
-            });
-
-        }
-
         function cargarTablaCajeras(data) {
 
             if (tableCajeras !== undefined) {
@@ -166,18 +123,57 @@
 
             tableCajeras = $("#tableCajeras").DataTable({
                 dom: 'lrt',
-                data: data,
-                columns: [{
-                        title: 'ID',
-                        data: 'id',
+                ajax: {
+                    url: 'getCajeras',
+                    type: 'GET',
+                    dataType: 'json',
+
+                    beforeSend: function() {
+
+                        Swal.fire({
+                            title: 'Descargando...',
+                            html: 'Espere un momento',
+                            didOpen: () => {
+                                Swal.showLoading()
+                            }
+                        });
+
+                    },
+
+                    complete: function(json) {
+
+                        Swal.close();
+
+                    },
+
+                    error: function(err) {
+
+                        console.error(err.responseJSON.message);
+
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Ocurrio un error al momento de descargar de base de datos',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#000',
+                        });
+
+                    },
+                },
+                columns: [
+                    {
+                        searchable: false,
+                        orderable: false,
+                        title: '#',
                         width: '5%',
+                        data: () => 0
                     },
                     {
-                        title: 'nombre',
+                        title: 'Nombre',
                         data: 'name'
                     },
                     {
-                        title: 'usuario',
+                        title: 'Usuario',
                         data: 'username'
                     },
                     {
@@ -190,10 +186,20 @@
                         }
                     }
                 ],
+                order: [1,'asc'],
                 scrollY: '50vh',
                 scrollCollapse: true,
                 paging: false,
             });
+
+            tableCajeras.on('order.dt search.dt', function() {
+                tableCajeras.column(0, {
+                    search: 'applied',
+                    order: 'applied'
+                }).nodes().each(function(cell, i) {
+                    cell.innerHTML = i + 1;
+                });
+            }).draw();
 
         }
 
@@ -265,7 +271,7 @@
 
         }
 
-        getCajeras();
+        cargarTablaCajeras();
 
         setInterval(showTime, 1000);
 

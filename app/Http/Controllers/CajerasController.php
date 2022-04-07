@@ -35,7 +35,9 @@ class CajerasController extends Controller
         // $cajeras = User::all();
         $cajeras = User::role('cajera')->get();
         
-        return $cajeras;
+        return response()->json([
+            'data' => $cajeras
+        ]);
     }
 
     public function addCajera(Request $request)

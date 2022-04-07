@@ -32,7 +32,9 @@ class ProductosController extends Controller
 
         $productos = Producto::select('productos.*','categorias.name as categoria')->join('categorias','categorias.id', '=', 'id_categoria')->get();
 
-        return $productos;
+        return response()->json([
+            'data' => $productos
+        ]);
     }
 
     public function addProducto(Request $request)
@@ -117,7 +119,9 @@ class ProductosController extends Controller
 
         $categorias = Categoria::all();
 
-        return $categorias;
+        return response()->json([
+            'data' => $categorias
+        ]);
     }
 
     public function addCategoria(Request $request)
@@ -143,7 +147,9 @@ class ProductosController extends Controller
 
         $promociones = Promocion::all();
 
-        return $promociones;
+        return response()->json([
+            'data' => $promociones
+        ]);
     }
 
     public function addPromocion(Request $request)
