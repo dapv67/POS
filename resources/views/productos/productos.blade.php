@@ -95,25 +95,25 @@
                                 <tr>
                                     <th scope="col">Nombre de la promoción</th>
                                     <th scope="col">Cód. producto/Categoría</th>
-                                    <th scope="col">Desde</th>
-                                    <th scope="col">Hasta</th>
-                                    <th scope="col">Precio promoción</th>
+                                    <th scope="col">Fecha inicio</th>
+                                    <th scope="col">Fecha fin</th>
+                                    <th scope="col">Descuento</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>Verano</td>
                                     <td>Pantalón azul 32 X 32</td>
-                                    <td>5</td>
-                                    <td>10</td>
-                                    <td>$150.00</td>
+                                    <td>05/04/2022</td>
+                                    <td>05/05/2022</td>
+                                    <td>20 %"</td>
                                 </tr>
                                 <tr>
-                                    <td>Invierno-verano</td>
+                                    <td>Navidad</td>
                                     <td>Ropa deportiva</td>
-                                    <td>5</td>
-                                    <td>10</td>
-                                    <td>$150.00</td>
+                                    <td>05/04/2022</td>
+                                    <td>05/05/2022</td>
+                                    <td>20 %"</td>
                                 </tr>
                             </tbody>
                         </table>
