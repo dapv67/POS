@@ -15,7 +15,6 @@ class Producto extends Model
         'precio_compra',
         'precio_venta',
         'existencia',
-        'categoria',
         'unidad',
         'minimo',
         'maximo',

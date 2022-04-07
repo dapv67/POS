@@ -174,23 +174,23 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="form-inline d-flex">
+                        <form id="verificadorForm" class="form-inline d-flex">
                             <input class="form-control me-2" type="search" placeholder="Código del producto"
-                                aria-label="Search" />
+                                aria-label="Search" name="codigo" />
                             <button class="btn btn-success" type="submit">
                                 ENTER - Verificar producto
                             </button>
                         </form>
                         <div class="details-precio">
-                            <p class="nombre-producto mb-4">Pantalón azul Lives 31 X 32</p>
-                            <p class="precio-producto">$559.00</p>
+                            <p id="nombre-producto" class="mb-4">Pantalón azul Lives 31 X 32</p>
+                            <p id="precio-producto">$559.00</p>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Cancelar
                         </button>
-                        <button type="button" class="btn btn-primary">
+                        <button onclick="addProdcuto()" type="button" class="btn btn-primary">
                             Agregar a venta
                         </button>
                     </div>
@@ -312,7 +312,7 @@
     </div>
 
     <script>
-        let table, contador = 0, total = 0.00;
+        let table, contador = 0, total = 0.00, productoTemp;
 
         table = $('#myTable').DataTable({
             dom: 'lrt',
@@ -374,6 +374,36 @@
             }
             $('#total').val(`$${total}`);
             $('#totalCobrar').html(`$${total}`);
+        }
+
+        function addProdcuto() {
+            console.log(productoTemp);
+            let flag = true;
+
+            var rows = table.rows().indexes();
+            var data = table.rows().data();
+
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].codigo == productoTemp.codigo) {
+                    table.cell(rows[i],3).data(parseInt(data[i].cantidad) + parseInt(productoTemp.cantidad));
+                    table.cell(rows[i],4).data(parseInt(data[i].importe) + parseInt(productoTemp.importe));
+                    flag = false;
+                }
+            }
+
+            if(flag){
+                table.row.add(productoTemp).draw(false);
+            }
+
+            $('#addProductoVenta')[0].reset();
+
+            $( '#codigo' ).focus();
+
+            contador += parseInt(productoTemp.cantidad, 10);
+
+            $('#cantidadProductos').html(contador);
+
+            actualizarTotal();
         }
 
         $( "#monto" ).blur(function() {
@@ -454,6 +484,58 @@
 
         });
 
+        $("#verificadorForm").submit(function(event) {
+
+            event.preventDefault();
+
+            const data = $(this).serialize();
+
+            $.ajax({
+
+                url: 'verificador',
+                data: data,
+                type: 'GET',
+                dataType: 'json',
+
+                beforeSend: function() {
+
+                    Swal.fire({
+                        title: 'Buscando...',
+                        html: 'Espere un momento',
+                        didOpen: () => {
+                            Swal.showLoading()
+                        }
+                    });
+
+                },
+
+                success: function(json) {
+
+                    Swal.close();
+
+                    console.log(json);
+                    $('#nombre-producto').html(json.descripcion);
+                    $('#precio-producto').html(json.precioVenta);
+
+                    productoTemp = json;
+
+                },
+
+                error: function(err) {
+
+                    console.log(err);
+
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'No se encontró el producto en base de datos',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+
+                },
+            });
+
+        });
 
         setInterval(showTime, 1000);
         function showTime() {

@@ -24,12 +24,13 @@ class ProductosController extends Controller
         $categorias = Categoria::all();
         
         return view('productos.productos', compact('categorias'));
+        
     }
 
     public function getProductos()
     {
 
-        $productos = Producto::all();
+        $productos = Producto::select('productos.*','categorias.name as categoria')->join('categorias','categorias.id', '=', 'id_categoria')->get();
 
         return $productos;
     }
@@ -37,31 +38,34 @@ class ProductosController extends Controller
     public function addProducto(Request $request)
     {
 
-        $id_categoria = $request->id_categoria | 0;
+        $categoria = $request->categoria | 0;
         $descripcion = $request->descripcion;
         $codigo = $request->codigo;
         $precio_compra = $request->precioCompra;
         $precio_venta = $request->precioVenta;
         $existencia = $request->existencia;
-        $categoria = $request->categoria;
         $unidad = $request->unidad | 0;
         $minimo = $request->minimo;
         $maximo = $request->maximo;
 
         $producto = Producto::create(
             [
-                'id_categoria' => $id_categoria,
+                'id_categoria' => $categoria,
                 'descripcion' => $descripcion,
                 'codigo' => $codigo,
                 'precio_compra' => $precio_compra,
                 'precio_venta' => $precio_venta,
                 'existencia' => $existencia,
-                'categoria' => $categoria,
                 'unidad' => $unidad,
                 'minimo' => $minimo,
                 'maximo' => $maximo,
             ]
         );
+
+        $producto = Producto::select('productos.*','categorias.name as categoria')
+            ->join('categorias','categorias.id', '=', 'id_categoria')
+            ->where('productos.id',$producto->id)
+            ->first();
 
         return $producto;
     }
@@ -83,6 +87,11 @@ class ProductosController extends Controller
         $producto->maximo = $maximo;
 
         $producto->save();
+
+        $producto = Producto::select('productos.*','categorias.name as categoria')
+            ->join('categorias','categorias.id', '=', 'id_categoria')
+            ->where('productos.id',$id)
+            ->first();
 
         return $producto;
     }

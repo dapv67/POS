@@ -43,4 +43,17 @@ class VentasController extends Controller
 
         return $producto;
     }
+
+    public function verificador(Request $request)
+    {
+
+        $codigo = $request->codigo;
+
+        $producto = Producto::select('id','codigo','descripcion','precio_venta as precioVenta','existencia')->where('codigo',$codigo)->first();
+
+        $producto->cantidad = 1;
+        $producto->importe = $producto->precioVenta;
+
+        return $producto;
+    }
 }

@@ -37,32 +37,45 @@ class ClientesController extends Controller
 
     public function addCliente(Request $request)
     {
+        
         $nombre = $request->nombre ? $request->nombre : 'NA';
-        $apellidos = $request->apellidos ? $request->apellidos : 'NA';
         $telefono = $request->telefono ? $request->telefono : 'NA';
         $celular = $request->celular ? $request->celular : 'NA';
         $correo = $request->correo ? $request->correo : 'NA';
-        $domicilio1 = $request->domicilio1 ? $request->domicilio1 : 'NA';
-        $domicilio2 = $request->domicilio2 ? $request->domicilio2 : 'NA';
+        $domicilio = $request->domicilio ? $request->domicilio : 'NA';
         $estado = $request->estado ? $request->estado : 'NA';
         $municipio = $request->municipio ? $request->municipio : 'NA';
-        $colonia = $request->colonia ? $request->colonia : 'NA';
-        $cp = $request->cp ? $request->cp : 'NA';
+        $lugar_trabajo = $request->lugar_trabajo ? $request->lugar_trabajo : 'NA';
+        $img = $request->img ? $request->img : 'NA';
+        $nombre_tercero = $request->nombre_tercero ? $request->nombre_tercero : 'NA';
+        $estado_tercero = $request->estado_tercero ? $request->estado_tercero : 'NA';
+        $municipio_tercero = $request->municipio_tercero ? $request->municipio_tercero : 'NA';
+        $domicilio_tercero = $request->domicilio_tercero ? $request->domicilio_tercero : 'NA';
+        $telefono_tercero = $request->telefono_tercero ? $request->telefono_tercero : 'NA';
+        $celular_tercero = $request->celular_tercero ? $request->celular_tercero : 'NA';
         $comentarios = $request->comentarios ? $request->comentarios : 'NA';
+
+        if ($request->hasFile('img')) {
+            $path = $request->img->store('uploads'); 
+        }
  
         $cliente = Cliente::create(
             [
                 'nombre' => $nombre,
-                'apellidos' => $apellidos,
                 'telefono' => $telefono,
                 'celular' => $celular,
                 'correo' => $correo,
-                'domicilio1' => $domicilio1,
-                'domicilio2' => $domicilio2,
+                'domicilio' => $domicilio,
                 'estado' => $estado,
                 'municipio' => $municipio,
-                'colonia' => $colonia,
-                'cp' => $cp,
+                'lugar_trabajo' => $lugar_trabajo,
+                'img' => $path ? $path : null,
+                'nombre_tercero' => $nombre_tercero,
+                'estado_tercero' => $estado_tercero,
+                'municipio_tercero' => $municipio_tercero,
+                'domicilio_tercero' => $domicilio_tercero,
+                'telefono_tercero' => $telefono_tercero,
+                'celular_tercero' => $celular_tercero,
                 'comentarios' => $comentarios,
             ]
         );

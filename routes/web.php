@@ -10,6 +10,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/ventas', 'VentasController@index')->name('ventas');
 Route::get('/addProductoVenta', 'VentasController@addProducto')->name('ventas.addProducto');
+Route::get('/verificador', 'VentasController@verificador')->name('ventas.verificador');
 
 Route::get('/productos', 'ProductosController@index')->name('productos');
 Route::get('/getProductos', 'ProductosController@getProductos')->name('productos.get');
